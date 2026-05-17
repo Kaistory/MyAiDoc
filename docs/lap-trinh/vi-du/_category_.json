@@ -1,0 +1,10 @@
+{
+  "label": "Ví dụ",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "description": "Các ví dụ code theo ngôn ngữ lập trình."
+  }
+}

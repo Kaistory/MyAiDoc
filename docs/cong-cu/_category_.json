@@ -1,0 +1,8 @@
+{
+  "label": "Công cụ",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "CLI, editor, workflow, và các công cụ khác."
+  }
+}
