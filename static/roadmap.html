@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Roadmap Firmware Engineer (Middle) — Dracaena JD</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --bg-2: #151b23;
+    --bg-3: #1c2430;
+    --border: #2a3441;
+    --text: #e6edf3;
+    --text-2: #9da7b3;
+    --accent: #58a6ff;
+    --accent-2: #7ee787;
+    --warn: #ffa657;
+    --danger: #ff7b72;
+    --core: #f85149;
+    --priority: #d29922;
+    --bonus: #56d364;
+    --shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+  .container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr; gap: 0; min-height: 100vh; }
+  /* Sidebar */
+  aside {
+    background: var(--bg-2);
+    border-right: 1px solid var(--border);
+    padding: 24px 18px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  aside h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-2); margin: 0 0 14px; }
+  aside ul { list-style: none; padding: 0; margin: 0; }
+  aside li { margin: 4px 0; }
+  aside a { color: var(--text); text-decoration: none; display: block; padding: 7px 10px; border-radius: 6px; font-size: 13.5px; transition: background .15s; border-left: 3px solid transparent; }
+  aside a:hover { background: var(--bg-3); border-left-color: var(--accent); }
+  aside a.active { background: var(--bg-3); border-left-color: var(--accent-2); color: var(--accent-2); }
+  .progress-box { margin-top: 22px; padding: 14px; background: var(--bg-3); border-radius: 8px; }
+  .progress-box p { margin: 0 0 8px; font-size: 12.5px; color: var(--text-2); }
+  .progress-bar { height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); width: 0%; transition: width .3s; }
+  .progress-num { text-align: center; margin-top: 6px; font-weight: 600; font-size: 13px; color: var(--accent-2); }
+  .reset-btn { margin-top: 10px; width: 100%; padding: 6px; background: transparent; color: var(--text-2); border: 1px solid var(--border); border-radius: 5px; cursor: pointer; font-size: 12px; }
+  .reset-btn:hover { background: var(--bg); color: var(--danger); border-color: var(--danger); }
+
+  /* Main */
+  main { padding: 40px 50px; max-width: none; }
+  header.hero { margin-bottom: 36px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  header.hero h1 { margin: 0 0 8px; font-size: 30px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  header.hero .meta { color: var(--text-2); font-size: 14.5px; }
+  header.hero .meta strong { color: var(--text); }
+  header.hero .jd-summary { margin-top: 18px; padding: 16px 20px; background: var(--bg-2); border-left: 4px solid var(--accent); border-radius: 6px; font-size: 14px; }
+
+  /* Legend */
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+  .badge.core { background: rgba(248,81,73,0.15); color: var(--core); border: 1px solid rgba(248,81,73,0.35); }
+  .badge.priority { background: rgba(210,153,34,0.15); color: var(--priority); border: 1px solid rgba(210,153,34,0.35); }
+  .badge.bonus { background: rgba(86,211,100,0.15); color: var(--bonus); border: 1px solid rgba(86,211,100,0.35); }
+
+  /* Sections */
+  section.topic { margin-bottom: 44px; padding: 24px 26px; background: var(--bg-2); border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+  section.topic h2 { margin: 0 0 6px; font-size: 22px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  section.topic h2 .num { color: var(--accent); font-weight: 700; }
+  section.topic .desc { color: var(--text-2); font-size: 14px; margin-bottom: 18px; }
+  section.topic h3 { margin: 22px 0 10px; font-size: 16px; color: var(--accent-2); border-bottom: 1px dashed var(--border); padding-bottom: 5px; }
+
+  /* Checklist */
+  ul.checklist { list-style: none; padding: 0; margin: 0; }
+  ul.checklist li { padding: 6px 0; display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; }
+  ul.checklist li label { cursor: pointer; flex: 1; user-select: none; }
+  ul.checklist li input[type="checkbox"] { margin-top: 5px; cursor: pointer; accent-color: var(--accent-2); width: 16px; height: 16px; flex-shrink: 0; }
+  ul.checklist li.done label { text-decoration: line-through; opacity: 0.55; }
+  ul.checklist code { background: var(--bg-3); padding: 1px 6px; border-radius: 3px; font-size: 13px; color: var(--warn); font-family: "Fira Code", "Consolas", monospace; }
+  ul.checklist b { color: var(--text); }
+
+  /* Resources box */
+  .resources { margin-top: 14px; padding: 12px 16px; background: var(--bg-3); border-radius: 6px; font-size: 13.5px; }
+  .resources strong { color: var(--accent); display: block; margin-bottom: 6px; }
+  .resources ul { margin: 0; padding-left: 18px; }
+  .resources li { margin: 3px 0; color: var(--text-2); }
+  .resources li b { color: var(--text); }
+
+  /* Timeline */
+  table.timeline { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px; }
+  table.timeline th, table.timeline td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  table.timeline th { background: var(--bg-3); color: var(--accent); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+  table.timeline tr:hover td { background: var(--bg-3); }
+
+  /* Project cards */
+  .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 14px; }
+  .project-card { background: var(--bg-3); padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent-2); }
+  .project-card h4 { margin: 0 0 6px; font-size: 15px; color: var(--text); }
+  .project-card p { margin: 0; font-size: 13px; color: var(--text-2); }
+  .project-card .stack { margin-top: 8px; font-size: 12px; color: var(--warn); font-family: monospace; }
+
+  footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-2); font-size: 13px; text-align: center; }
+
+  @media (max-width: 900px) {
+    .container { grid-template-columns: 1fr; }
+    aside { position: relative; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+    main { padding: 24px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Sidebar TOC -->
+  <aside>
+    <h2>📚 Mục lục</h2>
+    <ul id="toc">
+      <li><a href="#overview">Tổng quan JD</a></li>
+      <li><a href="#s1">1. C / C++ nhúng</a></li>
+      <li><a href="#s2">2. Linux Embedded</a></li>
+      <li><a href="#s3">3. Network TCP/IP</a></li>
+      <li><a href="#s4">4. Giao thức phần cứng</a></li>
+      <li><a href="#s5">5. Đọc datasheet</a></li>
+      <li><a href="#s6">6. FPGA &amp; Bitstream</a></li>
+      <li><a href="#s7">7. Crypto-mining</a></li>
+      <li><a href="#s8">8. AI/LLM Edge</a></li>
+      <li><a href="#s9">9. AWS Cloud</a></li>
+      <li><a href="#s10">10. Debug &amp; Tối ưu</a></li>
+      <li><a href="#s11">11. Tools &amp; DevOps</a></li>
+      <li><a href="#s12">12. AI Agents</a></li>
+      <li><a href="#s13">13. Deep Learning (D2L.ai)</a></li>
+      <li><a href="#timeline">⏱ Lộ trình 24 tháng</a></li>
+      <li><a href="#projects">🚀 Dự án portfolio</a></li>
+      <li><a href="#interview">🎯 Chuẩn bị phỏng vấn</a></li>
+    </ul>
+    <div class="progress-box">
+      <p>Tiến độ học</p>
+      <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+      <div class="progress-num" id="progNum">0 / 0 (0%)</div>
+      <button class="reset-btn" onclick="resetProgress()">Reset tiến độ</button>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main>
+    <header class="hero">
+      <h1>🔧 Roadmap Firmware Engineer (Middle Level)</h1>
+      <div class="meta">
+        Vị trí mục tiêu: <strong>Firmware Engineer 3+ năm</strong> · Công ty: <strong>Dracaena</strong> ·
+        Lương: <strong>25 – 40 triệu/tháng</strong> · Địa điểm: <strong>Sao Mai Building, Hà Nội</strong>
+      </div>
+      <div class="jd-summary">
+        <b>Tóm tắt JD:</b> Phát triển firmware Linux cho hệ thống mining (E300/E300+), inference LLM trên edge,
+        vận hành mining rigs + CMS trên AWS, phối hợp team FPGA tối ưu bitstream.
+        Yêu cầu cốt lõi: <b>C/C++ embedded, Linux IPC + multithreading + TCP/IP, UART/SPI/I2C/GPIO, debug HW</b>.
+        Ưu tiên: <b>FPGA, bitstream, crypto-mining</b>.
+      </div>
+      <div class="legend">
+        <span class="badge core">CORE — Bắt buộc</span>
+        <span class="badge priority">PRIORITY — Ưu tiên trong JD</span>
+        <span class="badge bonus">BONUS — Tăng giá trị CV</span>
+      </div>
+    </header>
+
+    <section class="topic" id="overview">
+      <h2><span class="num">📋</span> Tổng quan trách nhiệm công việc</h2>
+      <p class="desc">Đây là những gì bạn sẽ làm hàng ngày khi đã vào công ty — học để làm được những việc này:</p>
+      <ul class="checklist">
+        <li><input type="checkbox" id="ov1"><label for="ov1">Nghiên cứu thuật toán &amp; phát triển firmware cho hệ thống tính toán hiệu năng cao (mining/compute), vận hành <b>24/7 ổn định</b></label></li>
+        <li><input type="checkbox" id="ov2"><label for="ov2">Phát triển firmware trên thiết bị <b>E300 và E300+</b> (edge device)</label></li>
+        <li><input type="checkbox" id="ov3"><label for="ov3">Triển khai <b>inference LLM/AI</b> trên edge (E300+)</label></li>
+        <li><input type="checkbox" id="ov4"><label for="ov4">Test, vận hành mining rigs + <b>Center Management System</b> trên AWS</label></li>
+        <li><input type="checkbox" id="ov5"><label for="ov5">Phối hợp HW/FPGA/SW kiểm thử và tối ưu <b>bitstream</b></label></li>
+        <li><input type="checkbox" id="ov6"><label for="ov6">Debug firmware, tối ưu hiệu năng <b>CPU/memory/network</b></label></li>
+      </ul>
+    </section>
+
+    <!-- ============ SECTION 1: C/C++ ============ -->
+    <section class="topic" id="s1">
+      <h2><span class="num">1.</span> Lập trình C/C++ cho hệ thống nhúng <span class="badge core">CORE</span></h2>
+      <p class="desc">Nền tảng tuyệt đối. Mọi firmware engineer middle đều phải vững C, đọc/viết được C++ modern.</p>
+
+      <h3>1.1 C cơ bản → nâng cao</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="c1"><label for="c1">Con trỏ: <code>*ptr</code>, con trỏ hàm, con trỏ đa cấp, mảng vs con trỏ</label></li>
+        <li><input type="checkbox" id="c2"><label for="c2"><code>struct</code>, <code>union</code>, <code>enum</code>, bit-field, padding/alignment</label></li>
+        <li><input type="checkbox" id="c3"><label for="c3"><b>Bit manipulation</b>: shift, mask, set/clear/toggle bit (cực kỳ quan trọng với register HW)</label></li>
+        <li><input type="checkbox" id="c4"><label for="c4">Memory layout: <code>.text</code>, <code>.data</code>, <code>.bss</code>, stack, heap</label></li>
+        <li><input type="checkbox" id="c5"><label for="c5"><code>malloc/free</code>, memory leak, dangling pointer, double free, use-after-free</label></li>
+        <li><input type="checkbox" id="c6"><label for="c6">Storage class: <code>volatile</code>, <code>const</code>, <code>static</code>, <code>extern</code>, <code>inline</code>, <code>restrict</code></label></li>
+        <li><input type="checkbox" id="c7"><label for="c7">Preprocessor: macro, <code>#ifdef</code>, <code>#pragma</code>, conditional compilation</label></li>
+        <li><input type="checkbox" id="c8"><label for="c8">Function pointer + callback pattern (rất hay dùng trong driver/firmware)</label></li>
+        <li><input type="checkbox" id="c9"><label for="c9">Endianness (big/little endian), data alignment, packed struct</label></li>
+        <li><input type="checkbox" id="c10"><label for="c10">Undefined behavior, strict aliasing, integer overflow</label></li>
+      </ul>
+
+      <h3>1.2 C++ cho embedded</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="cpp1"><label for="cpp1">OOP cơ bản: class, inheritance, polymorphism, virtual function</label></li>
+        <li><input type="checkbox" id="cpp2"><label for="cpp2"><b>RAII</b> và smart pointers (<code>unique_ptr</code>, <code>shared_ptr</code>, <code>weak_ptr</code>)</label></li>
+        <li><input type="checkbox" id="cpp3"><label for="cpp3">Move semantics, rvalue reference (C++11)</label></li>
+        <li><input type="checkbox" id="cpp4"><label for="cpp4">Lambda, <code>std::function</code>, <code>std::bind</code></label></li>
+        <li><input type="checkbox" id="cpp5"><label for="cpp5">Template cơ bản, SFINAE basic</label></li>
+        <li><input type="checkbox" id="cpp6"><label for="cpp6">STL containers (<code>vector</code>, <code>map</code>, <code>unordered_map</code>, <code>string</code>) — và <b>khi nào không dùng</b> trong embedded</label></li>
+        <li><input type="checkbox" id="cpp7"><label for="cpp7">Exception (và lý do nhiều dự án embedded tắt exception)</label></li>
+        <li><input type="checkbox" id="cpp8"><label for="cpp8">Modern C++ (C++14/17): <code>auto</code>, range-for, <code>std::optional</code>, <code>std::variant</code></label></li>
+      </ul>
+
+      <h3>1.3 Build &amp; Toolchain</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="b1"><label for="b1">GCC/G++ flags: <code>-O0/-O2/-O3</code>, <code>-Wall -Wextra -Wpedantic</code>, <code>-g</code>, <code>-fsanitize=address</code></label></li>
+        <li><input type="checkbox" id="b2"><label for="b2"><b>Cross-compile</b>: <code>arm-linux-gnueabihf-gcc</code>, <code>aarch64-linux-gnu-gcc</code></label></li>
+        <li><input type="checkbox" id="b3"><label for="b3"><b>Makefile</b> viết tay từ đầu (target, dependency, pattern rule, automatic variable)</label></li>
+        <li><input type="checkbox" id="b4"><label for="b4"><b>CMake</b> hiện đại (target-based: <code>target_link_libraries</code>, <code>target_include_directories</code>)</label></li>
+        <li><input type="checkbox" id="b5"><label for="b5">Linker script (<code>.ld</code>), file <code>.map</code>, hiểu compile vs link</label></li>
+        <li><input type="checkbox" id="b6"><label for="b6">Static vs dynamic library (<code>.a</code> vs <code>.so</code>)</label></li>
+        <li><input type="checkbox" id="b7"><label for="b7">Tools: <code>objdump</code>, <code>readelf</code>, <code>nm</code>, <code>strings</code>, <code>addr2line</code>, <code>strip</code></label></li>
+      </ul>
+
+      <div class="resources">
+        <strong>📖 Tài liệu khuyến nghị</strong>
+        <ul>
+          <li><b>K&amp;R "The C Programming Language"</b> — kinh điển bắt buộc</li>
+          <li><b>"Expert C Programming: Deep C Secrets"</b> — Peter van der Linden</li>
+          <li><b>"Effective Modern C++"</b> — Scott Meyers (cho C++11/14)</li>
+          <li><b>"Embedded C Coding Standard"</b> — Barr Group (chuẩn code embedded)</li>
+          <li>Practice: <a href="https://exercism.io" style="color:var(--accent)">exercism.io</a> track C, <a href="https://www.hackerrank.com" style="color:var(--accent)">HackerRank</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 2: Linux Embedded ============ -->
+    <section class="topic" id="s2">
+      <h2><span class="num">2.</span> Linux Embedded <span class="badge core">CORE</span></h2>
+      <p class="desc">JD ghi rõ <b>"phát triển embedded software trên nền tảng Linux"</b> — đây là kỹ năng đắt giá nhất.</p>
+
+      <h3>2.1 Linux nền tảng (user-level)</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="l1"><label for="l1">Bash scripting: variable, loop, condition, function, array, regex</label></li>
+        <li><input type="checkbox" id="l2"><label for="l2">Lệnh hệ thống: <code>ps</code>, <code>top</code>, <code>htop</code>, <code>strace</code>, <code>ltrace</code>, <code>lsof</code>, <code>netstat/ss</code>, <code>dmesg</code>, <code>journalctl</code></label></li>
+        <li><input type="checkbox" id="l3"><label for="l3">File system: ext4, FAT, tmpfs, mount/umount, fstab</label></li>
+        <li><input type="checkbox" id="l4"><label for="l4"><code>/proc</code>, <code>/sys</code>, <code>/dev</code> — virtual filesystem để giao tiếp kernel</label></li>
+        <li><input type="checkbox" id="l5"><label for="l5">User/permission, capabilities, <code>chmod</code>, <code>chown</code>, sudo, setuid</label></li>
+        <li><input type="checkbox" id="l6"><label for="l6"><code>systemd</code>: viết unit file, service, target, dependency</label></li>
+        <li><input type="checkbox" id="l7"><label for="l7">Cron, logrotate, init scripts</label></li>
+        <li><input type="checkbox" id="l8"><label for="l8">Package management (apt, opkg cho embedded)</label></li>
+      </ul>
+
+      <h3>2.2 Linux System Programming (C trên Linux)</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="ls1"><label for="ls1">Process: <code>fork</code>, <code>exec</code>, <code>wait/waitpid</code>, <code>exit</code>, zombie/orphan</label></li>
+        <li><input type="checkbox" id="ls2"><label for="ls2">File I/O low-level: <code>open</code>, <code>read</code>, <code>write</code>, <code>close</code>, <code>lseek</code>, <code>fcntl</code>, <code>ioctl</code></label></li>
+        <li><input type="checkbox" id="ls3"><label for="ls3"><code>mmap</code> — memory-mapped I/O (rất hay dùng để truy cập HW register)</label></li>
+        <li><input type="checkbox" id="ls4"><label for="ls4">Signal: <code>signal</code>, <code>sigaction</code>, <code>sigprocmask</code>, signal-safe functions</label></li>
+        <li><input type="checkbox" id="ls5"><label for="ls5">I/O multiplexing: <code>select</code>, <code>poll</code>, <b><code>epoll</code></b> (high-performance)</label></li>
+        <li><input type="checkbox" id="ls6"><label for="ls6">Daemon programming (double fork, setsid, redirect stdio)</label></li>
+        <li><input type="checkbox" id="ls7"><label for="ls7">errno + error handling pattern trong C trên Linux</label></li>
+      </ul>
+
+      <h3>2.3 IPC — Inter-Process Communication <span class="badge core">JD nhấn mạnh</span></h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="ipc1"><label for="ipc1"><b>Pipe</b> (anonymous) và <b>FIFO/named pipe</b></label></li>
+        <li><input type="checkbox" id="ipc2"><label for="ipc2"><b>Message queue</b>: POSIX (<code>mq_*</code>) và System V (<code>msg*</code>)</label></li>
+        <li><input type="checkbox" id="ipc3"><label for="ipc3"><b>Shared memory</b>: <code>shm_open</code> + <code>mmap</code>, hoặc System V (<code>shmget</code>)</label></li>
+        <li><input type="checkbox" id="ipc4"><label for="ipc4"><b>Semaphore</b>: POSIX named/unnamed, System V semaphore set</label></li>
+        <li><input type="checkbox" id="ipc5"><label for="ipc5"><b>Unix domain socket</b> (stream &amp; datagram) — IPC nhanh, an toàn</label></li>
+        <li><input type="checkbox" id="ipc6"><label for="ipc6"><b>D-Bus</b> cơ bản (giao tiếp giữa các service trên Linux)</label></li>
+        <li><input type="checkbox" id="ipc7"><label for="ipc7">So sánh ưu/nhược điểm từng cơ chế, biết chọn đúng cho từng use case</label></li>
+      </ul>
+
+      <h3>2.4 Multithreading <span class="badge core">JD nhấn mạnh</span></h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="mt1"><label for="mt1"><b>pthread API</b>: create, join, detach, cancel, attr</label></li>
+        <li><input type="checkbox" id="mt2"><label for="mt2"><b>Mutex</b>: normal, recursive, error-check, robust</label></li>
+        <li><input type="checkbox" id="mt3"><label for="mt3"><b>Condition variable</b>: wait/signal/broadcast, spurious wakeup</label></li>
+        <li><input type="checkbox" id="mt4"><label for="mt4"><b>Read-write lock</b>, <b>spinlock</b>, <b>barrier</b></label></li>
+        <li><input type="checkbox" id="mt5"><label for="mt5">Thread-local storage (TLS), <code>pthread_key_create</code></label></li>
+        <li><input type="checkbox" id="mt6"><label for="mt6"><b>Race condition</b>, <b>deadlock</b>, <b>livelock</b>, <b>starvation</b> — phát hiện và phòng tránh</label></li>
+        <li><input type="checkbox" id="mt7"><label for="mt7">Atomic operations (<code>stdatomic.h</code> / <code>std::atomic</code>), memory ordering</label></li>
+        <li><input type="checkbox" id="mt8"><label for="mt8">Memory barrier, cache coherence cơ bản</label></li>
+        <li><input type="checkbox" id="mt9"><label for="mt9">Lock-free queue/ring buffer (cơ bản)</label></li>
+        <li><input type="checkbox" id="mt10"><label for="mt10">Thread pool pattern + producer-consumer pattern</label></li>
+      </ul>
+
+      <h3>2.5 Linux Embedded distro</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="le1"><label for="le1"><b>Yocto Project</b>: layer, recipe, BitBake, image build (mức làm được build cơ bản)</label></li>
+        <li><input type="checkbox" id="le2"><label for="le2"><b>Buildroot</b> — alternative đơn giản hơn Yocto</label></li>
+        <li><input type="checkbox" id="le3"><label for="le3"><b>U-Boot</b> bootloader: boot sequence, env variables, custom command</label></li>
+        <li><input type="checkbox" id="le4"><label for="le4"><b>Device Tree</b> (<code>.dts</code>, <code>.dtsi</code>) — quan trọng cho ARM Linux</label></li>
+        <li><input type="checkbox" id="le5"><label for="le5">Linux kernel module cơ bản: <code>insmod</code>, <code>rmmod</code>, viết module hello-world</label></li>
+        <li><input type="checkbox" id="le6"><label for="le6">Character device driver đơn giản (<code>file_operations</code>, <code>register_chrdev</code>)</label></li>
+        <li><input type="checkbox" id="le7"><label for="le7">Kernel debug: <code>printk</code>, <code>dmesg</code>, <code>/proc</code> entry</label></li>
+        <li><input type="checkbox" id="le8"><label for="le8">Cross-compile kernel, làm BSP cho board mới</label></li>
+      </ul>
+
+      <div class="resources">
+        <strong>📖 Tài liệu</strong>
+        <ul>
+          <li><b>"The Linux Programming Interface"</b> — Michael Kerrisk (kinh điển)</li>
+          <li><b>"Advanced Programming in the UNIX Environment"</b> — Stevens (APUE)</li>
+          <li><b>"Linux Device Drivers, 3rd"</b> — Corbet (LDD3, free online)</li>
+          <li><b>"Mastering Embedded Linux Programming"</b> — Chris Simmonds</li>
+          <li>Course: Bootlin embedded Linux training (free slides)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 3: TCP/IP ============ -->
+    <section class="topic" id="s3">
+      <h2><span class="num">3.</span> Network Programming TCP/IP <span class="badge core">CORE</span></h2>
+      <p class="desc">JD ghi rõ <b>"lập trình mạng TCP/IP trên Linux"</b>. Mining device giao tiếp pool qua TCP, CMS qua HTTPS/MQTT.</p>
+
+      <h3>3.1 Socket programming</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="n1"><label for="n1">TCP socket: <code>socket</code>, <code>bind</code>, <code>listen</code>, <code>accept</code>, <code>connect</code>, <code>send/recv</code></label></li>
+        <li><input type="checkbox" id="n2"><label for="n2">UDP socket: <code>sendto</code>, <code>recvfrom</code></label></li>
+        <li><input type="checkbox" id="n3"><label for="n3">Socket option: <code>SO_REUSEADDR</code>, <code>SO_KEEPALIVE</code>, <code>TCP_NODELAY</code>, <code>SO_RCVTIMEO</code></label></li>
+        <li><input type="checkbox" id="n4"><label for="n4"><b>Non-blocking socket</b> + <code>O_NONBLOCK</code> + <code>EAGAIN/EWOULDBLOCK</code> handling</label></li>
+        <li><input type="checkbox" id="n5"><label for="n5"><b>epoll</b> reactor pattern cho high-performance server</label></li>
+        <li><input type="checkbox" id="n6"><label for="n6">IPv4 vs IPv6, <code>getaddrinfo</code></label></li>
+      </ul>
+
+      <h3>3.2 Mô hình server</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="srv1"><label for="srv1">Iterative server, fork-per-connection</label></li>
+        <li><input type="checkbox" id="srv2"><label for="srv2">Thread-per-connection</label></li>
+        <li><input type="checkbox" id="srv3"><label for="srv3">Thread pool + queue</label></li>
+        <li><input type="checkbox" id="srv4"><label for="srv4">Event-driven (single-thread reactor) — libuv, libevent</label></li>
+      </ul>
+
+      <h3>3.3 Protocol &amp; security</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="p1"><label for="p1">HTTP/1.1, HTTP/2 cơ bản; <b>libcurl</b> client trong C</label></li>
+        <li><input type="checkbox" id="p2"><label for="p2"><b>WebSocket</b> protocol (rất hay dùng cho CMS realtime)</label></li>
+        <li><input type="checkbox" id="p3"><label for="p3"><b>MQTT</b> (mosquitto, paho) — chuẩn cho IoT/edge</label></li>
+        <li><input type="checkbox" id="p4"><label for="p4"><b>JSON</b> (cJSON, nlohmann/json) và <b>Protobuf</b></label></li>
+        <li><input type="checkbox" id="p5"><label for="p5"><b>TLS/SSL</b> với <b>OpenSSL</b> hoặc <b>mbedTLS</b> (mining-pool dùng SSL stratum)</label></li>
+        <li><input type="checkbox" id="p6"><label for="p6">Network debug: <code>tcpdump</code>, <b>Wireshark</b>, <code>netcat</code>, <code>iperf3</code></label></li>
+      </ul>
+
+      <div class="resources">
+        <strong>📖 Tài liệu</strong>
+        <ul>
+          <li><b>"UNIX Network Programming Vol.1"</b> — Stevens (UNP, kinh điển)</li>
+          <li><b>Beej's Guide to Network Programming</b> (free online)</li>
+          <li>RFC 793 (TCP), RFC 7230 (HTTP/1.1), RFC 6455 (WebSocket)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 4: HW Protocol ============ -->
+    <section class="topic" id="s4">
+      <h2><span class="num">4.</span> Giao thức truyền thông phần cứng <span class="badge core">CORE — JD liệt kê trực tiếp</span></h2>
+      <p class="desc">JD ghi: <b>"UART, SPI, I2C, GPIO,... debug firmware trên phần cứng thực tế"</b>.</p>
+
+      <h3>4.1 UART / Serial</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="u1"><label for="u1">Baud rate, data bit, parity, stop bit, flow control (RTS/CTS)</label></li>
+        <li><input type="checkbox" id="u2"><label for="u2">Framing trên Linux: <code>termios</code>, <code>/dev/ttyS*</code>, <code>/dev/ttyUSB*</code></label></li>
+        <li><input type="checkbox" id="u3"><label for="u3">Tools debug: <code>minicom</code>, <code>picocom</code>, <code>screen</code>, <code>cu</code></label></li>
+        <li><input type="checkbox" id="u4"><label for="u4">USB-to-UART adapter (CH340, CP2102, FTDI)</label></li>
+      </ul>
+
+      <h3>4.2 SPI</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="sp1"><label for="sp1">4 dây: MOSI, MISO, SCLK, CS; full-duplex</label></li>
+        <li><input type="checkbox" id="sp2"><label for="sp2"><b>4 SPI mode</b> (CPOL, CPHA) — phải hiểu rõ</label></li>
+        <li><input type="checkbox" id="sp3"><label for="sp3">Trên Linux: <code>spidev</code> userspace API, <code>ioctl SPI_IOC_*</code></label></li>
+        <li><input type="checkbox" id="sp4"><label for="sp4">SPI flash (W25Q*, MX25L*) — đọc/ghi qua SPI</label></li>
+      </ul>
+
+      <h3>4.3 I2C</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="i1"><label for="i1">2 dây SDA/SCL, master/slave, 7-bit + 10-bit address</label></li>
+        <li><input type="checkbox" id="i2"><label for="i2">Start/stop condition, ACK/NACK, clock stretching, arbitration</label></li>
+        <li><input type="checkbox" id="i3"><label for="i3">Trên Linux: <code>i2c-tools</code> (<code>i2cdetect</code>, <code>i2cget</code>, <code>i2cset</code>), <code>i2c-dev</code> API</label></li>
+        <li><input type="checkbox" id="i4"><label for="i4">Common chip: EEPROM (24Cxx), RTC (DS3231), sensor (BME280)</label></li>
+      </ul>
+
+      <h3>4.4 GPIO</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="g1"><label for="g1">Input/output, pull-up/pull-down, open-drain</label></li>
+        <li><input type="checkbox" id="g2"><label for="g2">Interrupt: edge trigger (rising/falling) vs level trigger</label></li>
+        <li><input type="checkbox" id="g3"><label for="g3">Cũ: sysfs (<code>/sys/class/gpio/</code>) — deprecated</label></li>
+        <li><input type="checkbox" id="g4"><label for="g4"><b>Mới: libgpiod</b> + <code>gpiochip</code> character device (chuẩn hiện đại)</label></li>
+        <li><input type="checkbox" id="g5"><label for="g5">Debounce switch, software vs hardware debounce</label></li>
+      </ul>
+
+      <h3>4.5 Giao thức khác (nên biết)</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="o1"><label for="o1"><b>PWM</b>: duty cycle, frequency (điều khiển quạt mining)</label></li>
+        <li><input type="checkbox" id="o2"><label for="o2"><b>ADC/DAC</b>: resolution, sampling rate, reference voltage</label></li>
+        <li><input type="checkbox" id="o3"><label for="o3"><b>USB</b>: host/device, descriptor, gadget driver trên Linux</label></li>
+        <li><input type="checkbox" id="o4"><label for="o4"><b>CAN bus</b> (automotive, industrial) — bonus</label></li>
+        <li><input type="checkbox" id="o5"><label for="o5"><b>PCIe</b> cơ bản (mining ASIC card thường dùng PCIe)</label></li>
+      </ul>
+
+      <h3>4.6 Tools đo lường — phải làm quen tay</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="t1"><label for="t1"><b>Multimeter</b>: đo điện áp, dòng, thông mạch</label></li>
+        <li><input type="checkbox" id="t2"><label for="t2"><b>Oscilloscope</b>: đọc waveform, đo timing</label></li>
+        <li><input type="checkbox" id="t3"><label for="t3"><b>Logic analyzer</b> (Saleae, DSLogic): decode SPI/I2C/UART thật</label></li>
+        <li><input type="checkbox" id="t4"><label for="t4">Soldering cơ bản (để hàn dây test)</label></li>
+      </ul>
+
+      <div class="resources">
+        <strong>🛒 Phần cứng nên mua thực hành</strong>
+        <ul>
+          <li><b>Raspberry Pi 4/5</b> + breadboard + jumper</li>
+          <li>Module test: DS3231 (I2C), W25Q64 (SPI flash), MPU6050, BME280</li>
+          <li>USB-UART CP2102, USB-to-TTL FTDI</li>
+          <li><b>Saleae Logic 8 clone</b> (~500k VND) — bắt buộc để debug HW</li>
+          <li>Multimeter rẻ (UNI-T UT33)</li>
+          <li>Nâng cao: <b>STM32F4 Discovery</b>, BeagleBone Black, Orange Pi 5</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 5: Datasheet ============ -->
+    <section class="topic" id="s5">
+      <h2><span class="num">5.</span> Đọc datasheet &amp; tài liệu kỹ thuật <span class="badge core">CORE — JD yêu cầu</span></h2>
+      <p class="desc">Đây là kỹ năng phân biệt junior và middle. Middle phải tự đọc 1000-trang reference manual, không hỏi đồng nghiệp.</p>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d1"><label for="d1">Phân biệt: <b>datasheet</b> vs <b>reference manual</b> vs <b>errata</b> vs <b>application note</b></label></li>
+        <li><input type="checkbox" id="d2"><label for="d2">Đọc <b>pinout</b>, <b>pin multiplexing</b> (alternate function)</label></li>
+        <li><input type="checkbox" id="d3"><label for="d3">Đọc <b>register map</b>, bit-field description</label></li>
+        <li><input type="checkbox" id="d4"><label for="d4">Đọc <b>timing diagram</b> (setup/hold time, propagation delay)</label></li>
+        <li><input type="checkbox" id="d5"><label for="d5">Memory map, address decode, peripheral base address</label></li>
+        <li><input type="checkbox" id="d6"><label for="d6">Electrical characteristic: V<sub>IH</sub>/V<sub>IL</sub>, I<sub>max</sub>, absolute maximum rating</label></li>
+        <li><input type="checkbox" id="d7"><label for="d7">Luyện đọc datasheet thật: STM32F4 RM0090, ESP32 TRM, Rockchip RK3588 TRM, Xilinx Zynq UG585</label></li>
+        <li><input type="checkbox" id="d8"><label for="d8">Từ vựng tiếng Anh kỹ thuật: assert/deassert, latch, prescaler, glitch, debounce, edge-triggered...</label></li>
+      </ul>
+    </section>
+
+    <!-- ============ SECTION 6: FPGA ============ -->
+    <section class="topic" id="s6">
+      <h2><span class="num">6.</span> FPGA &amp; Bitstream <span class="badge priority">PRIORITY — JD ưu tiên</span></h2>
+      <p class="desc">JD ghi rõ <b>"ưu tiên ứng viên có kinh nghiệm FPGA, bitstream"</b>. Mining E300 nhiều khả năng là FPGA-based.</p>
+      <ul class="checklist">
+        <li><input type="checkbox" id="f1"><label for="f1"><b>Verilog</b> cơ bản (hoặc VHDL): module, always block, blocking vs non-blocking</label></li>
+        <li><input type="checkbox" id="f2"><label for="f2">Combinational vs sequential logic, FSM (Mealy/Moore)</label></li>
+        <li><input type="checkbox" id="f3"><label for="f3">Synthesizable vs simulation-only code, timing constraint (SDC)</label></li>
+        <li><input type="checkbox" id="f4"><label for="f4">Testbench, simulation (ModelSim, Verilator, GHDL)</label></li>
+        <li><input type="checkbox" id="f5"><label for="f5"><b>Bitstream</b>: hiểu là gì, cách generate, cách nạp (JTAG, QSPI, SD)</label></li>
+        <li><input type="checkbox" id="f6"><label for="f6"><b>Xilinx Vivado</b> workflow (hoặc Intel Quartus)</label></li>
+        <li><input type="checkbox" id="f7"><label for="f7"><b>Zynq SoC</b> (ARM Cortex-A9/A53 + FPGA) — đặc biệt quan trọng</label></li>
+        <li><input type="checkbox" id="f8"><label for="f8"><b>AXI bus</b> (AXI4, AXI4-Lite, AXI-Stream) — giao tiếp CPU ↔ FPGA</label></li>
+        <li><input type="checkbox" id="f9"><label for="f9">Driver Linux cho IP FPGA (UIO, mmap PL region)</label></li>
+        <li><input type="checkbox" id="f10"><label for="f10">Partial reconfiguration cơ bản</label></li>
+      </ul>
+      <div class="resources">
+        <strong>📖 Tài liệu</strong>
+        <ul>
+          <li><b>"Digital Design and Computer Architecture"</b> — Harris &amp; Harris</li>
+          <li><b>"FPGA Prototyping by Verilog Examples"</b> — Pong P. Chu</li>
+          <li>Board thực hành: <b>Tang Nano 9K</b> (~400k VND, rẻ), <b>Arty A7</b>, <b>Zybo Z7</b></li>
+          <li>Course: nand2tetris (xây CPU từ logic gate)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 7: Mining ============ -->
+    <section class="topic" id="s7">
+      <h2><span class="num">7.</span> Crypto-mining Domain <span class="badge priority">PRIORITY</span></h2>
+      <p class="desc">Hiểu được nghiệp vụ thì làm việc nhanh gấp đôi. Tự đào 1 tuần test với pool thật là đủ.</p>
+      <ul class="checklist">
+        <li><input type="checkbox" id="m1"><label for="m1">Khái niệm <b>Proof-of-Work</b>: nonce, target, difficulty</label></li>
+        <li><input type="checkbox" id="m2"><label for="m2">Hash algorithm: <b>SHA-256</b> (Bitcoin), Scrypt (Litecoin), Ethash, Kaspa kHeavyHash</label></li>
+        <li><input type="checkbox" id="m3"><label for="m3"><b>Stratum protocol V1</b>: <code>mining.subscribe</code>, <code>mining.authorize</code>, <code>mining.notify</code>, <code>mining.submit</code></label></li>
+        <li><input type="checkbox" id="m4"><label for="m4"><b>Stratum V2</b> (mới hơn, binary, có encryption)</label></li>
+        <li><input type="checkbox" id="m5"><label for="m5">Cấu trúc miner: <b>hashboard</b>, <b>control board</b>, PSU, fan, cooling</label></li>
+        <li><input type="checkbox" id="m6"><label for="m6">Mining pool, share, reject rate, hashrate, watt/TH (efficiency)</label></li>
+        <li><input type="checkbox" id="m7"><label for="m7">Đọc source code <b>cgminer</b>, <b>bfgminer</b>, <b>bmminer</b> (open source miner FW)</label></li>
+        <li><input type="checkbox" id="m8"><label for="m8">Monitor: hashrate per board, temperature, error rate (HW error)</label></li>
+        <li><input type="checkbox" id="m9"><label for="m9">Auto-tuning: voltage/frequency theo nhiệt độ (DVFS)</label></li>
+      </ul>
+    </section>
+
+    <!-- ============ SECTION 8: AI/LLM ============ -->
+    <section class="topic" id="s8">
+      <h2><span class="num">8.</span> AI / LLM Edge Inference <span class="badge priority">PRIORITY — JD ghi rõ</span></h2>
+      <p class="desc">JD: <b>"Nghiên cứu và triển khai inference mô hình LLM/AI trên edge (E300+)"</b>. Đây là xu hướng mới.</p>
+      <ul class="checklist">
+        <li><input type="checkbox" id="a1"><label for="a1">Cơ bản neural network, transformer architecture (chỉ cần hiểu khái niệm)</label></li>
+        <li><input type="checkbox" id="a2"><label for="a2"><b>llama.cpp</b> — chuẩn vàng để chạy LLM trên CPU/ARM</label></li>
+        <li><input type="checkbox" id="a3"><label for="a3"><b>ONNX Runtime</b>, <b>TensorFlow Lite</b>, <b>NCNN/MNN</b></label></li>
+        <li><input type="checkbox" id="a4"><label for="a4"><b>Quantization</b>: INT8, INT4, GGUF format</label></li>
+        <li><input type="checkbox" id="a5"><label for="a5">Model thực hành chạy edge: <b>Qwen2.5-0.5B</b>, <b>Phi-3-mini</b>, <b>Gemma-2B</b>, <b>Llama-3.2-1B</b></label></li>
+        <li><input type="checkbox" id="a6"><label for="a6"><b>NPU/GPU accel</b> trên SoC: Mali GPU, Adreno, Rockchip RKNN, Intel NPU</label></li>
+        <li><input type="checkbox" id="a7"><label for="a7">Benchmark inference: token/s, latency, memory footprint</label></li>
+        <li><input type="checkbox" id="a8"><label for="a8">Build llama.cpp với BLAS, OpenBLAS, ARM NEON, Vulkan backend</label></li>
+        <li><input type="checkbox" id="a9"><label for="a9">REST API server (llama-server) để expose LLM ra ngoài</label></li>
+      </ul>
+    </section>
+
+    <!-- ============ SECTION 9: AWS ============ -->
+    <section class="topic" id="s9">
+      <h2><span class="num">9.</span> AWS Cloud <span class="badge priority">PRIORITY — JD ghi rõ</span></h2>
+      <p class="desc">JD: <b>"Center Management System trên AWS"</b>. Không cần thành chuyên gia, đủ vận hành là OK.</p>
+      <ul class="checklist">
+        <li><input type="checkbox" id="aws1"><label for="aws1"><b>EC2</b>: launch instance, SSH, security group, key pair</label></li>
+        <li><input type="checkbox" id="aws2"><label for="aws2"><b>S3</b>: bucket, upload firmware image, presigned URL</label></li>
+        <li><input type="checkbox" id="aws3"><label for="aws3"><b>IAM</b>: user, role, policy, access key</label></li>
+        <li><input type="checkbox" id="aws4"><label for="aws4"><b>VPC</b> cơ bản: subnet, route table, NAT</label></li>
+        <li><input type="checkbox" id="aws5"><label for="aws5"><b>AWS IoT Core</b>: MQTT broker, device shadow, rule engine</label></li>
+        <li><input type="checkbox" id="aws6"><label for="aws6"><b>CloudWatch</b>: log, metric, alarm</label></li>
+        <li><input type="checkbox" id="aws7"><label for="aws7"><b>Lambda</b> serverless cơ bản (xử lý event từ IoT)</label></li>
+        <li><input type="checkbox" id="aws8"><label for="aws8"><b>aws-cli</b>, boto3 (Python SDK)</label></li>
+        <li><input type="checkbox" id="aws9"><label for="aws9">Device provisioning + <b>OTA update</b> qua S3 + IoT Jobs</label></li>
+      </ul>
+    </section>
+
+    <!-- ============ SECTION 10: Debug ============ -->
+    <section class="topic" id="s10">
+      <h2><span class="num">10.</span> Debug &amp; Performance Optimization <span class="badge core">CORE — JD nhấn mạnh</span></h2>
+      <p class="desc">JD: <b>"Debug firmware, tối ưu hiệu năng CPU/memory/network"</b>. Middle phải tự debug được bug khó.</p>
+
+      <h3>10.1 Debug</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="db1"><label for="db1"><b>GDB</b> nâng cao: breakpoint, watchpoint, conditional bp, backtrace, frame, print, examine</label></li>
+        <li><input type="checkbox" id="db2"><label for="db2"><b>Remote GDB</b>: <code>gdbserver</code> + cross gdb, debug target qua TCP</label></li>
+        <li><input type="checkbox" id="db3"><label for="db3"><b>Core dump</b>: enable, analyze (<code>gdb prog core</code>)</label></li>
+        <li><input type="checkbox" id="db4"><label for="db4"><b>JTAG / SWD</b>: J-Link, ST-Link, OpenOCD</label></li>
+        <li><input type="checkbox" id="db5"><label for="db5"><b>Address Sanitizer (ASan)</b>, UBSan, TSan, Valgrind</label></li>
+        <li><input type="checkbox" id="db6"><label for="db6">Strategic <code>printf</code> debug: log level, ring buffer log, timestamp</label></li>
+        <li><input type="checkbox" id="db7"><label for="db7">Debug race condition (<b>TSan</b>, helgrind)</label></li>
+        <li><input type="checkbox" id="db8"><label for="db8">Reproduce intermittent bug (stress test, randomization)</label></li>
+      </ul>
+
+      <h3>10.2 Profiling &amp; Tối ưu</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="pf1"><label for="pf1"><b>perf</b>: <code>perf top</code>, <code>perf record/report</code>, flamegraph</label></li>
+        <li><input type="checkbox" id="pf2"><label for="pf2"><b>strace</b>, <b>ltrace</b>, <b>ftrace</b></label></li>
+        <li><input type="checkbox" id="pf3"><label for="pf3"><b>eBPF</b> / bcc tools cơ bản (<code>bpftrace</code>)</label></li>
+        <li><input type="checkbox" id="pf4"><label for="pf4">CPU tối ưu: cache miss, branch mispredict, SIMD (NEON cho ARM)</label></li>
+        <li><input type="checkbox" id="pf5"><label for="pf5">Memory tối ưu: pool allocator, cache locality, false sharing</label></li>
+        <li><input type="checkbox" id="pf6"><label for="pf6">Network tối ưu: batching, zero-copy (<code>sendfile</code>, <code>splice</code>), SO_BUSY_POLL</label></li>
+        <li><input type="checkbox" id="pf7"><label for="pf7">I/O tối ưu: <code>O_DIRECT</code>, async I/O (<code>io_uring</code> cơ bản)</label></li>
+        <li><input type="checkbox" id="pf8"><label for="pf8">Power optimization: CPU governor, sleep state (cho mining: vẫn quan trọng)</label></li>
+      </ul>
+    </section>
+
+    <!-- ============ SECTION 11: DevOps ============ -->
+    <section class="topic" id="s11">
+      <h2><span class="num">11.</span> Tools &amp; DevOps cho Firmware <span class="badge bonus">BONUS</span></h2>
+      <ul class="checklist">
+        <li><input type="checkbox" id="dv1"><label for="dv1"><b>Git</b> thành thạo: rebase, cherry-pick, bisect, reflog, worktree</label></li>
+        <li><input type="checkbox" id="dv2"><label for="dv2">Code review trên Gerrit / GitHub PR / GitLab MR</label></li>
+        <li><input type="checkbox" id="dv3"><label for="dv3"><b>CI/CD</b>: GitHub Actions / GitLab CI / Jenkins để build firmware tự động</label></li>
+        <li><input type="checkbox" id="dv4"><label for="dv4"><b>Docker</b> cho build environment (cross-compile container)</label></li>
+        <li><input type="checkbox" id="dv5"><label for="dv5"><b>OTA Update</b>: A/B partition, rollback, fail-safe</label></li>
+        <li><input type="checkbox" id="dv6"><label for="dv6">Logging system: rsyslog, journald, custom ring-buffer logger</label></li>
+        <li><input type="checkbox" id="dv7"><label for="dv7">Static analysis: <code>cppcheck</code>, <code>clang-tidy</code>, <code>scan-build</code></label></li>
+        <li><input type="checkbox" id="dv8"><label for="dv8">Unit test C/C++: <b>GoogleTest</b>, Unity, CMocka</label></li>
+      </ul>
+    </section>
+
+    <!-- ============ SECTION 12: AI Agents ============ -->
+    <section class="topic" id="s12">
+      <h2><span class="num">12.</span> AI Agents trong công việc <span class="badge priority">JD nhấn mạnh</span></h2>
+      <p class="desc">JD: <b>"biết vận dụng hiệu quả AI agents vào công việc hàng ngày"</b>. Trả lời được câu này khi phỏng vấn là điểm cộng lớn.</p>
+      <ul class="checklist">
+        <li><input type="checkbox" id="ai1"><label for="ai1"><b>Claude Code</b>, <b>Cursor</b>, <b>GitHub Copilot</b> — biết dùng ≥ 1 cái thành thạo</label></li>
+        <li><input type="checkbox" id="ai2"><label for="ai2">Prompt engineering hiệu quả cho code task</label></li>
+        <li><input type="checkbox" id="ai3"><label for="ai3">Dùng AI đọc datasheet, sinh boilerplate driver, viết unit test</label></li>
+        <li><input type="checkbox" id="ai4"><label for="ai4">Dùng AI review code, refactor, sinh CMake/script</label></li>
+        <li><input type="checkbox" id="ai5"><label for="ai5">Biết giới hạn của AI — không tin mù quáng, luôn verify code sinh ra</label></li>
+        <li><input type="checkbox" id="ai6"><label for="ai6">MCP server, local LLM (Ollama) cho code offline</label></li>
+      </ul>
+    </section>
+
+    <!-- ============ SECTION 13: Deep Learning D2L.ai ============ -->
+    <section class="topic" id="s13">
+      <h2><span class="num">13.</span> Deep Learning Theory — theo <a href="https://d2l.ai/" style="color:var(--accent)">D2L.ai</a> <span class="badge priority">PRIORITY — phục vụ LLM/AI Edge của JD</span></h2>
+      <p class="desc">
+        "Dive into Deep Learning" (d2l.ai) là sách miễn phí, interactive, dùng tại 500+ trường (MIT, Stanford, CMU...).
+        Là nền tảng lý thuyết AI cần để hiểu inference LLM/AI trên E300+. Học song song code (PyTorch / MXNet / JAX / TF).
+        <b>Lưu ý cho vị trí firmware:</b> bạn không cần train model lớn — chỉ cần <b>hiểu kiến trúc đủ để optimize inference, quantize, port qua C/C++</b>.
+      </p>
+
+      <h3>Phần I — Nền tảng (Chương 1–5) <span class="badge core">BẮT BUỘC</span></h3>
+
+      <h3>Ch.1 Introduction</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_1_1"><label for="d2l_1_1">A Motivating Example — ví dụ động lực của DL</label></li>
+        <li><input type="checkbox" id="d2l_1_2"><label for="d2l_1_2">Key Components: data, model, objective function, optimization</label></li>
+        <li><input type="checkbox" id="d2l_1_3"><label for="d2l_1_3">Kinds of Machine Learning Problems (supervised, unsupervised, RL)</label></li>
+        <li><input type="checkbox" id="d2l_1_4"><label for="d2l_1_4">Roots &amp; The Road to Deep Learning (lịch sử)</label></li>
+        <li><input type="checkbox" id="d2l_1_5"><label for="d2l_1_5">Success Stories &amp; The Essence of Deep Learning</label></li>
+      </ul>
+
+      <h3>Ch.2 Preliminaries</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_2_1"><label for="d2l_2_1">Data Manipulation (tensor cơ bản, ndarray)</label></li>
+        <li><input type="checkbox" id="d2l_2_2"><label for="d2l_2_2">Data Preprocessing (pandas, missing value, one-hot)</label></li>
+        <li><input type="checkbox" id="d2l_2_3"><label for="d2l_2_3"><b>Linear Algebra</b>: vector, matrix, tensor, norm, dot/matmul</label></li>
+        <li><input type="checkbox" id="d2l_2_4"><label for="d2l_2_4"><b>Calculus</b>: gradient, chain rule, partial derivative</label></li>
+        <li><input type="checkbox" id="d2l_2_5"><label for="d2l_2_5"><b>Automatic Differentiation</b> (autograd) — cốt lõi của DL framework</label></li>
+        <li><input type="checkbox" id="d2l_2_6"><label for="d2l_2_6">Probability and Statistics cơ bản</label></li>
+        <li><input type="checkbox" id="d2l_2_7"><label for="d2l_2_7">Documentation (tra API hiệu quả)</label></li>
+      </ul>
+
+      <h3>Ch.3 Linear Neural Networks for Regression</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_3_1"><label for="d2l_3_1">Linear Regression (analytical &amp; iterative solution)</label></li>
+        <li><input type="checkbox" id="d2l_3_2"><label for="d2l_3_2">Object-Oriented Design for Implementation</label></li>
+        <li><input type="checkbox" id="d2l_3_3"><label for="d2l_3_3">Synthetic Regression Data</label></li>
+        <li><input type="checkbox" id="d2l_3_4"><label for="d2l_3_4"><b>Linear Regression Implementation from Scratch</b> (NumPy thuần)</label></li>
+        <li><input type="checkbox" id="d2l_3_5"><label for="d2l_3_5">Concise Implementation (PyTorch nn.Linear)</label></li>
+        <li><input type="checkbox" id="d2l_3_6"><label for="d2l_3_6">Generalization (train vs test, overfitting, underfitting)</label></li>
+        <li><input type="checkbox" id="d2l_3_7"><label for="d2l_3_7">Weight Decay (L2 regularization)</label></li>
+      </ul>
+
+      <h3>Ch.4 Linear Neural Networks for Classification</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_4_1"><label for="d2l_4_1"><b>Softmax Regression</b> + cross-entropy loss</label></li>
+        <li><input type="checkbox" id="d2l_4_2"><label for="d2l_4_2">The Image Classification Dataset (Fashion-MNIST)</label></li>
+        <li><input type="checkbox" id="d2l_4_3"><label for="d2l_4_3">The Base Classification Model</label></li>
+        <li><input type="checkbox" id="d2l_4_4"><label for="d2l_4_4">Softmax Regression Implementation from Scratch</label></li>
+        <li><input type="checkbox" id="d2l_4_5"><label for="d2l_4_5">Concise Implementation of Softmax Regression</label></li>
+        <li><input type="checkbox" id="d2l_4_6"><label for="d2l_4_6">Generalization in Classification</label></li>
+        <li><input type="checkbox" id="d2l_4_7"><label for="d2l_4_7">Environment and Distribution Shift (covariate shift, label shift)</label></li>
+      </ul>
+
+      <h3>Ch.5 Multilayer Perceptrons</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_5_1"><label for="d2l_5_1">Multilayer Perceptrons + activation function (ReLU, sigmoid, tanh)</label></li>
+        <li><input type="checkbox" id="d2l_5_2"><label for="d2l_5_2">Implementation of MLPs</label></li>
+        <li><input type="checkbox" id="d2l_5_3"><label for="d2l_5_3"><b>Forward / Backward Propagation</b>, Computational Graph</label></li>
+        <li><input type="checkbox" id="d2l_5_4"><label for="d2l_5_4"><b>Numerical Stability</b> &amp; Initialization (Xavier, Kaiming)</label></li>
+        <li><input type="checkbox" id="d2l_5_5"><label for="d2l_5_5">Generalization in Deep Learning</label></li>
+        <li><input type="checkbox" id="d2l_5_6"><label for="d2l_5_6">Dropout</label></li>
+        <li><input type="checkbox" id="d2l_5_7"><label for="d2l_5_7">Predicting House Prices on Kaggle (mini-project)</label></li>
+      </ul>
+
+      <h3>Phần II — Engineering (Chương 6) <span class="badge core">BẮT BUỘC</span></h3>
+      <h3>Ch.6 Builders' Guide</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_6_1"><label for="d2l_6_1">Layers and Modules (nn.Module)</label></li>
+        <li><input type="checkbox" id="d2l_6_2"><label for="d2l_6_2">Parameter Management</label></li>
+        <li><input type="checkbox" id="d2l_6_3"><label for="d2l_6_3">Parameter Initialization (Xavier, He)</label></li>
+        <li><input type="checkbox" id="d2l_6_4"><label for="d2l_6_4">Lazy Initialization</label></li>
+        <li><input type="checkbox" id="d2l_6_5"><label for="d2l_6_5">Custom Layers</label></li>
+        <li><input type="checkbox" id="d2l_6_6"><label for="d2l_6_6">File I/O (save/load model — quan trọng cho deploy edge)</label></li>
+        <li><input type="checkbox" id="d2l_6_7"><label for="d2l_6_7">GPUs (chỉ định device, transfer tensor)</label></li>
+      </ul>
+
+      <h3>Phần III — CNN (Chương 7–8) <span class="badge priority">RẤT HỮU ÍCH cho vision edge</span></h3>
+      <h3>Ch.7 Convolutional Neural Networks</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_7_1"><label for="d2l_7_1">From Fully Connected Layers to Convolutions (intuition)</label></li>
+        <li><input type="checkbox" id="d2l_7_2"><label for="d2l_7_2">Convolutions for Images (2D conv operator)</label></li>
+        <li><input type="checkbox" id="d2l_7_3"><label for="d2l_7_3">Padding and Stride</label></li>
+        <li><input type="checkbox" id="d2l_7_4"><label for="d2l_7_4">Multiple Input/Output Channels (1x1 conv)</label></li>
+        <li><input type="checkbox" id="d2l_7_5"><label for="d2l_7_5">Pooling (max/avg)</label></li>
+        <li><input type="checkbox" id="d2l_7_6"><label for="d2l_7_6"><b>LeNet</b> (CNN đầu tiên — implement được từ scratch)</label></li>
+      </ul>
+
+      <h3>Ch.8 Modern CNNs</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_8_1"><label for="d2l_8_1">AlexNet (deep CNN breakthrough)</label></li>
+        <li><input type="checkbox" id="d2l_8_2"><label for="d2l_8_2">VGG (block-based design)</label></li>
+        <li><input type="checkbox" id="d2l_8_3"><label for="d2l_8_3">Network in Network (NiN)</label></li>
+        <li><input type="checkbox" id="d2l_8_4"><label for="d2l_8_4">GoogLeNet (Inception, multi-branch)</label></li>
+        <li><input type="checkbox" id="d2l_8_5"><label for="d2l_8_5"><b>Batch Normalization</b> (kỹ thuật must-know)</label></li>
+        <li><input type="checkbox" id="d2l_8_6"><label for="d2l_8_6"><b>ResNet / ResNeXt</b> — residual connection, kiến trúc phổ biến nhất</label></li>
+        <li><input type="checkbox" id="d2l_8_7"><label for="d2l_8_7">DenseNet (densely connected)</label></li>
+        <li><input type="checkbox" id="d2l_8_8"><label for="d2l_8_8">Designing CNN Architectures (RegNet)</label></li>
+      </ul>
+
+      <h3>Phần IV — Sequence Models (Chương 9–10)</h3>
+      <h3>Ch.9 Recurrent Neural Networks</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_9_1"><label for="d2l_9_1">Working with Sequences (time series, language)</label></li>
+        <li><input type="checkbox" id="d2l_9_2"><label for="d2l_9_2">Converting Raw Text into Sequence Data (tokenize, vocab)</label></li>
+        <li><input type="checkbox" id="d2l_9_3"><label for="d2l_9_3">Language Models (n-gram, perplexity)</label></li>
+        <li><input type="checkbox" id="d2l_9_4"><label for="d2l_9_4">Vanilla RNN</label></li>
+        <li><input type="checkbox" id="d2l_9_5"><label for="d2l_9_5">RNN Implementation from Scratch</label></li>
+        <li><input type="checkbox" id="d2l_9_6"><label for="d2l_9_6">Concise Implementation of RNNs</label></li>
+        <li><input type="checkbox" id="d2l_9_7"><label for="d2l_9_7">Backpropagation Through Time (BPTT)</label></li>
+      </ul>
+
+      <h3>Ch.10 Modern RNNs</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_10_1"><label for="d2l_10_1"><b>LSTM</b> (gating mechanism)</label></li>
+        <li><input type="checkbox" id="d2l_10_2"><label for="d2l_10_2"><b>GRU</b> (đơn giản hơn LSTM)</label></li>
+        <li><input type="checkbox" id="d2l_10_3"><label for="d2l_10_3">Deep RNN (stacked)</label></li>
+        <li><input type="checkbox" id="d2l_10_4"><label for="d2l_10_4">Bidirectional RNN</label></li>
+        <li><input type="checkbox" id="d2l_10_5"><label for="d2l_10_5">Machine Translation &amp; Dataset</label></li>
+        <li><input type="checkbox" id="d2l_10_6"><label for="d2l_10_6">Encoder–Decoder Architecture</label></li>
+        <li><input type="checkbox" id="d2l_10_7"><label for="d2l_10_7">Sequence-to-Sequence Learning</label></li>
+        <li><input type="checkbox" id="d2l_10_8"><label for="d2l_10_8">Beam Search</label></li>
+      </ul>
+
+      <h3>Phần V — Attention &amp; Transformers (Chương 11) <span class="badge core">CỰC KỲ QUAN TRỌNG cho LLM</span></h3>
+      <h3>Ch.11 Attention Mechanisms and Transformers</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_11_1"><label for="d2l_11_1"><b>Queries, Keys, Values</b> (Q/K/V intuition)</label></li>
+        <li><input type="checkbox" id="d2l_11_2"><label for="d2l_11_2">Attention Pooling by Similarity</label></li>
+        <li><input type="checkbox" id="d2l_11_3"><label for="d2l_11_3">Attention Scoring Functions (dot-product, additive)</label></li>
+        <li><input type="checkbox" id="d2l_11_4"><label for="d2l_11_4">Bahdanau Attention</label></li>
+        <li><input type="checkbox" id="d2l_11_5"><label for="d2l_11_5"><b>Multi-Head Attention</b></label></li>
+        <li><input type="checkbox" id="d2l_11_6"><label for="d2l_11_6"><b>Self-Attention &amp; Positional Encoding</b></label></li>
+        <li><input type="checkbox" id="d2l_11_7"><label for="d2l_11_7"><b>Transformer Architecture</b> đầy đủ — đọc kèm "Attention Is All You Need"</label></li>
+        <li><input type="checkbox" id="d2l_11_8"><label for="d2l_11_8">Vision Transformer (ViT)</label></li>
+        <li><input type="checkbox" id="d2l_11_9"><label for="d2l_11_9">Large-Scale Pretraining with Transformers (GPT, BERT, T5 overview)</label></li>
+      </ul>
+
+      <h3>Phần VI — Optimization &amp; Performance (Chương 12–13) <span class="badge core">QUAN TRỌNG cho firmware tối ưu</span></h3>
+      <h3>Ch.12 Optimization Algorithms</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_12_1"><label for="d2l_12_1">Optimization and Deep Learning (loss landscape)</label></li>
+        <li><input type="checkbox" id="d2l_12_2"><label for="d2l_12_2">Convexity</label></li>
+        <li><input type="checkbox" id="d2l_12_3"><label for="d2l_12_3">Gradient Descent</label></li>
+        <li><input type="checkbox" id="d2l_12_4"><label for="d2l_12_4">SGD (Stochastic Gradient Descent)</label></li>
+        <li><input type="checkbox" id="d2l_12_5"><label for="d2l_12_5">Minibatch SGD</label></li>
+        <li><input type="checkbox" id="d2l_12_6"><label for="d2l_12_6">Momentum</label></li>
+        <li><input type="checkbox" id="d2l_12_7"><label for="d2l_12_7">Adagrad, RMSProp, Adadelta</label></li>
+        <li><input type="checkbox" id="d2l_12_8"><label for="d2l_12_8"><b>Adam</b> (optimizer mặc định)</label></li>
+        <li><input type="checkbox" id="d2l_12_9"><label for="d2l_12_9">Learning Rate Scheduling (warmup, cosine)</label></li>
+      </ul>
+
+      <h3>Ch.13 Computational Performance <span class="badge priority">Liên quan trực tiếp đến edge inference</span></h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_13_1"><label for="d2l_13_1">Compilers and Interpreters (TorchScript, ONNX, JIT)</label></li>
+        <li><input type="checkbox" id="d2l_13_2"><label for="d2l_13_2">Asynchronous Computation</label></li>
+        <li><input type="checkbox" id="d2l_13_3"><label for="d2l_13_3">Automatic Parallelism</label></li>
+        <li><input type="checkbox" id="d2l_13_4"><label for="d2l_13_4"><b>Hardware</b> (CPU/GPU/TPU/NPU — chương đắt giá cho firmware)</label></li>
+        <li><input type="checkbox" id="d2l_13_5"><label for="d2l_13_5">Training on Multiple GPUs</label></li>
+        <li><input type="checkbox" id="d2l_13_6"><label for="d2l_13_6">Concise Implementation for Multiple GPUs</label></li>
+        <li><input type="checkbox" id="d2l_13_7"><label for="d2l_13_7">Parameter Servers (distributed training)</label></li>
+      </ul>
+
+      <h3>Phần VII — Computer Vision (Chương 14)</h3>
+      <h3>Ch.14 Computer Vision</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_14_1"><label for="d2l_14_1">Image Augmentation</label></li>
+        <li><input type="checkbox" id="d2l_14_2"><label for="d2l_14_2"><b>Fine-Tuning</b> (transfer learning — rất hay dùng edge)</label></li>
+        <li><input type="checkbox" id="d2l_14_3"><label for="d2l_14_3">Object Detection &amp; Bounding Boxes</label></li>
+        <li><input type="checkbox" id="d2l_14_4"><label for="d2l_14_4">Anchor Boxes</label></li>
+        <li><input type="checkbox" id="d2l_14_5"><label for="d2l_14_5">Multiscale Object Detection</label></li>
+        <li><input type="checkbox" id="d2l_14_6"><label for="d2l_14_6">Object Detection Dataset</label></li>
+        <li><input type="checkbox" id="d2l_14_7"><label for="d2l_14_7"><b>SSD</b> (Single Shot Detection)</label></li>
+        <li><input type="checkbox" id="d2l_14_8"><label for="d2l_14_8">R-CNN family</label></li>
+        <li><input type="checkbox" id="d2l_14_9"><label for="d2l_14_9">Semantic Segmentation</label></li>
+        <li><input type="checkbox" id="d2l_14_10"><label for="d2l_14_10">Transposed Convolution</label></li>
+        <li><input type="checkbox" id="d2l_14_11"><label for="d2l_14_11">Fully Convolutional Networks (FCN)</label></li>
+        <li><input type="checkbox" id="d2l_14_12"><label for="d2l_14_12">Neural Style Transfer</label></li>
+        <li><input type="checkbox" id="d2l_14_13"><label for="d2l_14_13">Kaggle: CIFAR-10 + Dog Breed</label></li>
+      </ul>
+
+      <h3>Phần VIII — NLP (Chương 15–16)</h3>
+      <h3>Ch.15 NLP Pretraining</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_15_1"><label for="d2l_15_1"><b>word2vec</b> (CBOW, Skip-gram)</label></li>
+        <li><input type="checkbox" id="d2l_15_2"><label for="d2l_15_2">Approximate Training (negative sampling, hierarchical softmax)</label></li>
+        <li><input type="checkbox" id="d2l_15_3"><label for="d2l_15_3">Dataset for Pretraining Word Embeddings</label></li>
+        <li><input type="checkbox" id="d2l_15_4"><label for="d2l_15_4">Pretraining word2vec</label></li>
+        <li><input type="checkbox" id="d2l_15_5"><label for="d2l_15_5">GloVe (Global Vectors)</label></li>
+        <li><input type="checkbox" id="d2l_15_6"><label for="d2l_15_6">Subword Embedding (BPE — quan trọng cho tokenizer LLM)</label></li>
+        <li><input type="checkbox" id="d2l_15_7"><label for="d2l_15_7">Word Similarity and Analogy</label></li>
+        <li><input type="checkbox" id="d2l_15_8"><label for="d2l_15_8"><b>BERT</b></label></li>
+        <li><input type="checkbox" id="d2l_15_9"><label for="d2l_15_9">Dataset for Pretraining BERT</label></li>
+        <li><input type="checkbox" id="d2l_15_10"><label for="d2l_15_10">Pretraining BERT</label></li>
+      </ul>
+
+      <h3>Ch.16 NLP Applications</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_16_1"><label for="d2l_16_1">Sentiment Analysis (dataset, RNN, CNN)</label></li>
+        <li><input type="checkbox" id="d2l_16_2"><label for="d2l_16_2">Natural Language Inference</label></li>
+        <li><input type="checkbox" id="d2l_16_3"><label for="d2l_16_3">Fine-Tuning BERT cho sequence/token-level task</label></li>
+      </ul>
+
+      <h3>Phần IX — Chuyên đề (Chương 17–21) <span class="badge bonus">Đọc khi có thời gian</span></h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_17"><label for="d2l_17"><b>Ch.17 Reinforcement Learning</b>: MDP, Value Iteration, Q-Learning (hữu ích cho auto-tuning mining)</label></li>
+        <li><input type="checkbox" id="d2l_18"><label for="d2l_18"><b>Ch.18 Gaussian Processes</b>: Priors, Inference (cao cấp, tùy chọn)</label></li>
+        <li><input type="checkbox" id="d2l_19"><label for="d2l_19"><b>Ch.19 Hyperparameter Optimization</b>: Random Search, ASHA, Multi-Fidelity</label></li>
+        <li><input type="checkbox" id="d2l_20"><label for="d2l_20"><b>Ch.20 GANs</b>: Vanilla GAN, DCGAN</label></li>
+        <li><input type="checkbox" id="d2l_21"><label for="d2l_21"><b>Ch.21 Recommender Systems</b>: MF, AutoRec, NCF, FM (không liên quan trực tiếp JD)</label></li>
+      </ul>
+
+      <h3>Phần X — Appendix <span class="badge bonus">Tra cứu khi cần</span></h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="d2l_22_1"><label for="d2l_22_1">App.22 Math: Linear Algebra, Eigen, Calculus, Probability, MLE, Naive Bayes, Information Theory</label></li>
+        <li><input type="checkbox" id="d2l_22_2"><label for="d2l_22_2">App.23 Tools: Jupyter, SageMaker, EC2, Colab, chọn server/GPU</label></li>
+      </ul>
+
+      <div class="resources">
+        <strong>📚 Cách học d2l.ai hiệu quả</strong>
+        <ul>
+          <li>Mỗi chương đều có <b>code chạy được</b> trên PyTorch/MXNet/TF/JAX — clone repo <code>github.com/d2l-ai/d2l-en</code> chạy local</li>
+          <li>Sách có phiên bản <b>tiếng Việt</b>: <a href="https://d2l.aivivn.com/" style="color:var(--accent)">d2l.aivivn.com</a></li>
+          <li>Discussion forum: <a href="https://discuss.d2l.ai/" style="color:var(--accent)">discuss.d2l.ai</a></li>
+          <li>YouTube: Mu Li (tác giả) có lectures video kèm theo (cực kỳ chất lượng)</li>
+          <li>Berkeley STAT 157 dùng sách này → có lecture đầy đủ trên YouTube</li>
+        </ul>
+      </div>
+
+      <h3>🎯 Lộ trình ưu tiên cho vị trí Firmware/Edge AI này</h3>
+      <table class="timeline">
+        <thead><tr><th>Mức ưu tiên</th><th>Chương</th><th>Lý do</th></tr></thead>
+        <tbody>
+          <tr><td>🔴 Phải đọc</td><td>1, 2, 3, 5, 6</td><td>Nền tảng tuyệt đối — tensor, autograd, MLP, save/load model</td></tr>
+          <tr><td>🔴 Phải đọc</td><td>11 (Transformer)</td><td>Hiểu kiến trúc LLM → mới optimize được inference trên E300+</td></tr>
+          <tr><td>🔴 Phải đọc</td><td>13 (Computational Performance)</td><td>Liên quan trực tiếp đến tối ưu inference edge — hardware, async, compiler</td></tr>
+          <tr><td>🟡 Nên đọc</td><td>7, 8 (CNN)</td><td>Nếu E300+ chạy vision model</td></tr>
+          <tr><td>🟡 Nên đọc</td><td>12 (Optimization)</td><td>Hiểu cách model học để biết quantization có thể phá gì</td></tr>
+          <tr><td>🟡 Nên đọc</td><td>14 (CV)</td><td>Fine-tuning + detection cho edge camera</td></tr>
+          <tr><td>🟢 Đọc khi rảnh</td><td>9, 10, 15, 16</td><td>RNN/NLP tiền-Transformer + BERT</td></tr>
+          <tr><td>🟢 Đọc khi rảnh</td><td>17 (RL)</td><td>Hữu ích cho auto-tuning voltage/freq mining (DVFS)</td></tr>
+          <tr><td>⚪ Bỏ qua</td><td>18, 20, 21</td><td>Không liên quan trực tiếp JD này</td></tr>
+        </tbody>
+      </table>
+
+      <h3>🚀 Dự án từ d2l.ai phù hợp với vị trí Firmware/Edge AI</h3>
+      <div class="projects">
+        <div class="project-card">
+          <h4>D1. LeNet trong C thuần cho MCU</h4>
+          <p>Học Ch.5 + Ch.7, train LeNet trên Fashion-MNIST bằng PyTorch, sau đó <b>port forward pass sang C99 thuần</b> (không dùng framework), chạy trên STM32F4 hoặc Raspberry Pi Pico.</p>
+          <p class="stack">PyTorch → C99 → STM32, fixed-point math</p>
+        </div>
+        <div class="project-card">
+          <h4>D2. ResNet INT8 trên ARM</h4>
+          <p>Train ResNet-18 trên CIFAR-10 (Ch.8), quantize INT8 bằng PyTorch quantization, deploy lên Orange Pi 5 / Rockchip RK3588 NPU bằng RKNN-Toolkit.</p>
+          <p class="stack">PyTorch quant, ONNX, RKNN, ARM NEON</p>
+        </div>
+        <div class="project-card">
+          <h4>D3. Transformer mini scratch</h4>
+          <p>Implement Transformer encoder-decoder cho machine translation (Ch.11) từ đầu bằng NumPy, sau đó tối ưu bằng C++ với Eigen. Compare hiệu năng với PyTorch.</p>
+          <p class="stack">NumPy → C++ Eigen, profiling</p>
+        </div>
+        <div class="project-card">
+          <h4>D4. Edge LLM benchmark suite</h4>
+          <p>Chạy Qwen2.5-0.5B/Phi-3-mini/Llama-3.2-1B trên Pi 5, Orange Pi 5, Jetson Nano bằng llama.cpp. Đo token/s, RAM, watt. Áp dụng kiến thức Ch.13.</p>
+          <p class="stack">llama.cpp, GGUF, ARM NEON, Vulkan</p>
+        </div>
+        <div class="project-card">
+          <h4>D5. RL cho DVFS Miner</h4>
+          <p>Áp dụng Q-Learning (Ch.17) để học chính sách điều khiển voltage/frequency của hashboard theo nhiệt độ → tối ưu hashrate/watt. Triển khai trên firmware mining test.</p>
+          <p class="stack">Python (train) → C (deploy), Q-table on flash</p>
+        </div>
+        <div class="project-card">
+          <h4>D6. YOLO-nano edge inference</h4>
+          <p>Train detection model nhỏ (Ch.14), export ONNX, deploy lên USB camera + Orange Pi. Realtime ≥ 15 FPS. Có MQTT publish lên AWS IoT.</p>
+          <p class="stack">YOLOv5n, ONNX Runtime, OpenCV, MQTT</p>
+        </div>
+        <div class="project-card">
+          <h4>D7. BERT-tiny sentiment classifier</h4>
+          <p>Fine-tune DistilBERT/TinyBERT (Ch.15-16), quantize, chạy trên CPU ARM. Pipeline: nhận message qua MQTT → classify → publish kết quả.</p>
+          <p class="stack">HuggingFace, ONNX, ARM</p>
+        </div>
+        <div class="project-card">
+          <h4>D8. Custom autograd engine</h4>
+          <p>Tự viết engine autograd C++ ~300 dòng (theo style micrograd của Karpathy), train MLP solve XOR. Hiểu sâu Ch.2 + Ch.5.</p>
+          <p class="stack">C++17, template, computational graph</p>
+        </div>
+        <div class="project-card">
+          <h4>D9. Hyperparameter tuning farm</h4>
+          <p>Áp dụng Ch.19 — chạy ASHA scheduler trên cluster mining rig idle để tune hyperparam model edge. Kết hợp AWS Spot.</p>
+          <p class="stack">Ray Tune, AWS, Python</p>
+        </div>
+        <div class="project-card">
+          <h4>D10. OTA model update</h4>
+          <p>Pipeline: train model trên cloud (Ch.23) → upload S3 → device pull qua MQTT → swap model atomically (A/B model partition).</p>
+          <p class="stack">SageMaker, S3, AWS IoT Jobs, C++</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TIMELINE ============ -->
+    <section class="topic" id="timeline">
+      <h2><span class="num">⏱</span> Lộ trình 24 tháng (từ junior lên middle)</h2>
+      <p class="desc">Giả định bạn đã biết lập trình cơ bản. Mỗi tuần ~15-20 giờ học/thực hành.</p>
+      <table class="timeline">
+        <thead>
+          <tr><th>Giai đoạn</th><th>Tháng</th><th>Trọng tâm</th><th>Kết quả mong đợi</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>1 – 3</td><td>C nâng cao + Linux command + Git + Makefile/CMake</td><td>Viết được CLI tool 500+ dòng C, build được bằng CMake</td></tr>
+          <tr><td>2</td><td>4 – 6</td><td>Linux system programming + IPC + multithreading</td><td>Viết được chat server multi-client dùng epoll + thread pool</td></tr>
+          <tr><td>3</td><td>7 – 9</td><td>TCP/IP socket + UART/SPI/I2C trên Raspberry Pi / STM32</td><td>Đọc sensor I2C + đẩy data qua MQTT lên cloud</td></tr>
+          <tr><td>4</td><td>10 – 12</td><td>Yocto/Buildroot + Device Tree + viết driver Linux đơn giản</td><td>Tự build được custom Linux image cho Pi/BBB, có driver tự viết</td></tr>
+          <tr><td>5</td><td>13 – 15</td><td>Debug GDB/JTAG + perf + tối ưu performance</td><td>Profile được app và giảm CPU/memory ≥ 30%</td></tr>
+          <tr><td>6</td><td>16 – 18</td><td>FPGA Verilog cơ bản + Zynq + AXI</td><td>Blink LED + UART trên Tang Nano, hoặc Zybo Zynq</td></tr>
+          <tr><td>7</td><td>19 – 21</td><td>AI inference edge + AWS IoT + OTA update</td><td>Chạy được Qwen-0.5B trên Orange Pi, có pipeline OTA qua S3</td></tr>
+          <tr><td>8</td><td>22 – 24</td><td>Crypto-mining domain + đọc cgminer source + portfolio polish</td><td>Mini-miner controller hoàn chỉnh, CV + GitHub sẵn sàng apply</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="topic" id="projects">
+      <h2><span class="num">🚀</span> Dự án portfolio nên làm (quan trọng nhất)</h2>
+      <p class="desc">Một dự án thực thay được 1 năm kinh nghiệm trên CV. Làm 3-4 cái dưới đây là đủ apply middle.</p>
+      <div class="projects">
+        <div class="project-card">
+          <h4>1. Mini-miner Controller</h4>
+          <p>Raspberry Pi điều khiển 1 board ASIC/CPU miner qua UART, implement Stratum V1 client, gửi share lên pool thật, log lên AWS IoT.</p>
+          <p class="stack">C, pthread, libcurl, OpenSSL, JSON-RPC, MQTT</p>
+        </div>
+        <div class="project-card">
+          <h4>2. Edge LLM Device</h4>
+          <p>Chạy Qwen2.5-0.5B hoặc Phi-3-mini trên Orange Pi 5 / Rockchip board với llama.cpp, expose REST API.</p>
+          <p class="stack">llama.cpp, RKNN, C++, ARM NEON</p>
+        </div>
+        <div class="project-card">
+          <h4>3. Multi-protocol IoT Gateway</h4>
+          <p>Thu thập data từ sensor I2C/SPI/UART → đẩy lên AWS IoT Core qua MQTT-TLS, có web dashboard.</p>
+          <p class="stack">C, Mosquitto, libgpiod, OpenSSL, AWS IoT</p>
+        </div>
+        <div class="project-card">
+          <h4>4. Linux Char Device Driver</h4>
+          <p>Viết driver cho 1 sensor I2C (BME280) hoặc 1 IP FPGA, có sysfs interface. Bonus: contribute upstream.</p>
+          <p class="stack">Linux kernel module, Device Tree</p>
+        </div>
+        <div class="project-card">
+          <h4>5. Yocto Custom Image</h4>
+          <p>Tự build Yocto image cho Raspberry Pi với app C++ của mình tích hợp sẵn, có OTA update.</p>
+          <p class="stack">Yocto, BitBake, systemd, RAUC/Mender</p>
+        </div>
+        <div class="project-card">
+          <h4>6. FPGA SHA-256 Accelerator</h4>
+          <p>Implement SHA-256 trên Tang Nano hoặc Zybo, giao tiếp ARM qua AXI, compare hashrate vs CPU.</p>
+          <p class="stack">Verilog, Vivado, AXI4-Lite, Linux UIO</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INTERVIEW ============ -->
+    <section class="topic" id="interview">
+      <h2><span class="num">🎯</span> Chuẩn bị phỏng vấn Firmware Middle</h2>
+      <p class="desc">Những câu hỏi thường gặp khi phỏng vấn firmware engineer 3+ năm.</p>
+
+      <h3>Câu hỏi C/C++ kinh điển</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="iv1"><label for="iv1">Phân biệt <code>const char*</code>, <code>char* const</code>, <code>const char* const</code></label></li>
+        <li><input type="checkbox" id="iv2"><label for="iv2">Tại sao cần <code>volatile</code>? Cho ví dụ</label></li>
+        <li><input type="checkbox" id="iv3"><label for="iv3">Sự khác nhau giữa stack và heap, kích thước stack mặc định trên Linux</label></li>
+        <li><input type="checkbox" id="iv4"><label for="iv4">Implement <code>memcpy</code>, <code>strlen</code>, <code>strcpy</code> không dùng thư viện</label></li>
+        <li><input type="checkbox" id="iv5"><label for="iv5">Đếm số bit 1 trong một số nguyên (nhiều cách)</label></li>
+        <li><input type="checkbox" id="iv6"><label for="iv6">Phát hiện endianness của hệ thống</label></li>
+        <li><input type="checkbox" id="iv7"><label for="iv7">Implement ring buffer thread-safe</label></li>
+      </ul>
+
+      <h3>Câu hỏi Linux/OS</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="iv8"><label for="iv8">So sánh <code>fork</code> vs <code>vfork</code> vs <code>clone</code> vs <code>pthread_create</code></label></li>
+        <li><input type="checkbox" id="iv9"><label for="iv9">Khi nào dùng mutex, khi nào spinlock?</label></li>
+        <li><input type="checkbox" id="iv10"><label for="iv10">Cơ chế xảy ra deadlock và 4 điều kiện Coffman</label></li>
+        <li><input type="checkbox" id="iv11"><label for="iv11"><code>select</code> vs <code>poll</code> vs <code>epoll</code> — ưu/nhược</label></li>
+        <li><input type="checkbox" id="iv12"><label for="iv12">Process state diagram (running, ready, blocked, zombie)</label></li>
+        <li><input type="checkbox" id="iv13"><label for="iv13">Virtual memory, page table, MMU</label></li>
+      </ul>
+
+      <h3>Câu hỏi mạng</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="iv14"><label for="iv14">TCP 3-way handshake, 4-way close, TIME_WAIT là gì</label></li>
+        <li><input type="checkbox" id="iv15"><label for="iv15">TCP congestion control cơ bản (slow start, AIMD)</label></li>
+        <li><input type="checkbox" id="iv16"><label for="iv16">Nagle's algorithm, TCP_NODELAY khi nào dùng</label></li>
+        <li><input type="checkbox" id="iv17"><label for="iv17">Khác nhau TCP vs UDP, khi nào chọn cái nào</label></li>
+      </ul>
+
+      <h3>Câu hỏi giao thức HW</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="iv18"><label for="iv18">SPI 4 mode khác nhau thế nào</label></li>
+        <li><input type="checkbox" id="iv19"><label for="iv19">I2C clock stretching để làm gì</label></li>
+        <li><input type="checkbox" id="iv20"><label for="iv20">Tại sao UART có start/stop bit</label></li>
+        <li><input type="checkbox" id="iv21"><label for="iv21">Debounce switch trong HW vs SW</label></li>
+      </ul>
+
+      <h3>Câu hỏi thực tế / scenario</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="iv22"><label for="iv22">Firmware bị crash sau 3 ngày chạy → bạn debug thế nào?</label></li>
+        <li><input type="checkbox" id="iv23"><label for="iv23">CPU load 100% mà không biết tại sao → các bước investigate?</label></li>
+        <li><input type="checkbox" id="iv24"><label for="iv24">Đọc sensor I2C bị lỗi ngẫu nhiên → debug thế nào?</label></li>
+        <li><input type="checkbox" id="iv25"><label for="iv25">Hai thread cùng truy cập 1 biến nhưng không lock → tại sao?</label></li>
+      </ul>
+    </section>
+
+    <footer>
+      Roadmap được tổng hợp dựa trên JD <b>Firmware Engineer (3+ năm)</b> tại Dracaena · Generated 2026-05-18 ·
+      Lưu tiến độ tự động vào browser localStorage · Nhấn checkbox để đánh dấu mục đã học.
+    </footer>
+  </main>
+</div>
+
+<script>
+  // ===== Progress tracking via localStorage =====
+  const STORAGE_KEY = 'firmware_roadmap_progress_v1';
+
+  function loadProgress() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveProgress(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+  function updateProgressBar() {
+    const boxes = document.querySelectorAll('input[type="checkbox"]');
+    const total = boxes.length;
+    const done = Array.from(boxes).filter(b => b.checked).length;
+    const pct = total ? Math.round(done * 100 / total) : 0;
+    document.getElementById('progFill').style.width = pct + '%';
+    document.getElementById('progNum').textContent = `${done} / ${total} (${pct}%)`;
+  }
+  function applyDoneClass(cb) {
+    const li = cb.closest('li');
+    if (li) li.classList.toggle('done', cb.checked);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const state = loadProgress();
+    const boxes = document.querySelectorAll('input[type="checkbox"]');
+    boxes.forEach(cb => {
+      if (state[cb.id]) { cb.checked = true; applyDoneClass(cb); }
+      cb.addEventListener('change', () => {
+        const s = loadProgress();
+        if (cb.checked) s[cb.id] = 1; else delete s[cb.id];
+        saveProgress(s);
+        applyDoneClass(cb);
+        updateProgressBar();
+      });
+    });
+    updateProgressBar();
+
+    // ===== Active TOC highlight on scroll =====
+    const tocLinks = document.querySelectorAll('#toc a');
+    const sections = Array.from(tocLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    sections.forEach(s => obs.observe(s));
+  });
+
+  function resetProgress() {
+    if (!confirm('Xóa toàn bộ tiến độ đã đánh dấu?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => { cb.checked = false; applyDoneClass(cb); });
+    updateProgressBar();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__chrome-devtools__new_page",
+      "Bash(curl -s -o /dev/null -w \"homepage: %{http_code}\\\\n\" http://localhost:3000/MyAiDoc/)",
+      "Bash(curl -s -o /dev/null -w \"roadmap: %{http_code}\\\\n\" http://localhost:3000/MyAiDoc/roadmap.html)",
+      "Bash(curl -s http://localhost:3000/MyAiDoc/)",
+      "Bash(curl -s http://localhost:3000/MyAiDoc/ -o \"C:\\\\Users\\\\Kaito\\\\AppData\\\\Local\\\\Temp\\\\homepage.html\")",
+      "Read(//c/Users/Kaito/AppData/Local/Temp/**)",
+      "WebSearch",
+      "Bash(netstat -ano)",
+      "Bash(taskkill *)"
+    ]
+  }
+}

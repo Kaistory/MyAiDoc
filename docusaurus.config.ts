@@ -80,6 +80,11 @@ const config: Config = {
         },
         {to: '/blog', label: 'Nhật ký', position: 'left'},
         {
+          href: 'pathname:///MyAiDoc/roadmap.html',
+          label: 'Roadmap',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/Kaistory/MyAiDoc',
           label: 'GitHub',
           position: 'right',
