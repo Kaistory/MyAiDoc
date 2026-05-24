@@ -85,9 +85,9 @@ def llm_judge(q, a, gt, model="claude-sonnet-4-6"):
     return json.loads(resp.content[0].text)
 ```
 
-:::warning Position bias
-Khi so 2 câu trả lời A vs B, LLM judge **thiên về câu A** (vị trí đầu). Mẹo: shuffle vị trí, hoặc chấm độc lập.
-:::
+> ⚠️ **Cảnh báo — Position bias**
+>
+> Khi so 2 câu trả lời A vs B, LLM judge **thiên về câu A** (vị trí đầu). Mẹo: shuffle vị trí, hoặc chấm độc lập.
 
 ### 2.3 RAG-specific (Ragas)
 
@@ -287,9 +287,9 @@ Out-of-domain            2%         50%         0%          0%
 7. Lặp lại.
 ```
 
-:::tip
-Đừng nhảy vào "tuning model" trước khi đọc 100 fail bằng mắt. 80% insight nằm ở việc đọc thật cẩn thận một số ít sample.
-:::
+> 💡 **Mẹo**
+>
+> Đừng nhảy vào "tuning model" trước khi đọc 100 fail bằng mắt. 80% insight nằm ở việc đọc thật cẩn thận một số ít sample.
 
 ### 4.4 Tool: Phoenix
 
@@ -330,9 +330,9 @@ Sau 1-2 tuần, đo:
 
 Statistical significance: dùng [Sequential testing](https://www.evanmiller.org/sequential-ab-testing.html) hoặc Bayesian.
 
-:::warning Không A/B test quá nhiều thứ cùng lúc
-Thay đổi 1 thứ một lần. Nếu đổi prompt + model + top-K cùng lúc → không biết yếu tố nào gây ra cải thiện.
-:::
+> ⚠️ **Cảnh báo — Không A/B test quá nhiều thứ cùng lúc**
+>
+> Thay đổi 1 thứ một lần. Nếu đổi prompt + model + top-K cùng lúc → không biết yếu tố nào gây ra cải thiện.
 
 ---
 

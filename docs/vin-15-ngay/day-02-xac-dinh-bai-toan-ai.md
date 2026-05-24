@@ -19,10 +19,10 @@ Không phải bài toán nào cũng cần AI. Quy tắc đơn giản:
 | Cần **tự nhiên hoá** giao diện (chat, voice) | Đã có API/quy trình ổn |
 | Có **đủ dữ liệu** hoặc model pre-train đủ tốt | Không có dữ liệu, không có model phù hợp |
 
-:::tip Quy tắc 80/20
-Nếu bạn có thể viết **rule** giải quyết 80% bài toán trong 1 ngày, đừng dùng AI cho phần đó.
-Dùng AI để xử lý **20% phần khó** thôi — chi phí thấp, dễ debug.
-:::
+> 💡 **Mẹo — Quy tắc 80/20**
+>
+> Nếu bạn có thể viết **rule** giải quyết 80% bài toán trong 1 ngày, đừng dùng AI cho phần đó.
+> Dùng AI để xử lý **20% phần khó** thôi — chi phí thấp, dễ debug.
 
 ### Ví dụ cụ thể
 
@@ -80,9 +80,9 @@ Liệt kê **5 bài toán** trong công việc hiện tại của bạn. Đánh 
         ↑ Dễ debug                                 ↑ Khó debug
 ```
 
-:::tip Bắt đầu từ đơn giản
-**Đừng nhảy thẳng vào LLM**. Thử rule-based hoặc ML cổ điển trước. Nếu không đạt thì leo thang.
-:::
+> 💡 **Mẹo — Bắt đầu từ đơn giản**
+>
+> **Đừng nhảy thẳng vào LLM**. Thử rule-based hoặc ML cổ điển trước. Nếu không đạt thì leo thang.
 
 ### Bài tập 2.2
 
@@ -171,13 +171,13 @@ Chọn 1 bài toán từ bài tập 2.1, áp dụng:
 
 ## 4. Anti-pattern thường gặp
 
-:::warning Sai lầm phổ biến
-1. **AI-first**: "Phải có AI" rồi mới tìm bài toán → ngược.
-2. **Over-engineer**: Bài toán đơn giản nhưng dùng multi-agent + vector DB + fine-tune.
-3. **Hallucination tolerance**: Dùng LLM cho việc cần đúng 100% (tài chính, y tế) mà không có guardrail.
-4. **No baseline**: Không có rule/ML baseline để so sánh — không biết AI có thực sự cải thiện không.
-5. **No eval set**: Không có bộ test, đánh giá bằng cảm tính.
-:::
+> ⚠️ **Cảnh báo — Sai lầm phổ biến**
+>
+> 1. **AI-first**: "Phải có AI" rồi mới tìm bài toán → ngược.
+> 2. **Over-engineer**: Bài toán đơn giản nhưng dùng multi-agent + vector DB + fine-tune.
+> 3. **Hallucination tolerance**: Dùng LLM cho việc cần đúng 100% (tài chính, y tế) mà không có guardrail.
+> 4. **No baseline**: Không có rule/ML baseline để so sánh — không biết AI có thực sự cải thiện không.
+> 5. **No eval set**: Không có bộ test, đánh giá bằng cảm tính.
 
 ## 5. Phương pháp Product Discovery cho AI
 

@@ -140,9 +140,9 @@ print(tok.tokenize("Xin chào, AI!"))
 
 **Tiktoken (OpenAI)**, **SentencePiece** (Google), **BPE-style** (LLaMA) — đều biến thể BPE.
 
-:::warning Tiếng Việt
-Vì tokenizer train chủ yếu trên tiếng Anh, tiếng Việt tốn **gấp 1.5-3x** token. Llama 3 đã cải thiện đáng kể.
-:::
+> ⚠️ **Cảnh báo — Tiếng Việt**
+>
+> Vì tokenizer train chủ yếu trên tiếng Anh, tiếng Việt tốn **gấp 1.5-3x** token. Llama 3 đã cải thiện đáng kể.
 
 ### Bài tập 16.2
 

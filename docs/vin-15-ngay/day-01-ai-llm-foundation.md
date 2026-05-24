@@ -69,11 +69,11 @@ print(enc.decode(tokens))   # "Xin chào, AI!"
 print(f"Số token: {len(tokens)}")
 ```
 
-:::info Vì sao quan trọng?
-- LLM tính **giá theo token** (input + output).
-- LLM có **giới hạn context** tính theo token (vd: Claude Opus 4.7 = **1M token**).
-- Ngôn ngữ khác nhau có hiệu suất token khác nhau (tiếng Việt thường tốn nhiều token hơn tiếng Anh).
-:::
+> ℹ️ **Thông tin — Vì sao quan trọng?**
+>
+> - LLM tính **giá theo token** (input + output).
+> - LLM có **giới hạn context** tính theo token (vd: Claude Opus 4.7 = **1M token**).
+> - Ngôn ngữ khác nhau có hiệu suất token khác nhau (tiếng Việt thường tốn nhiều token hơn tiếng Anh).
 
 ### 2.2 Embedding — biến token thành vector
 
@@ -207,12 +207,12 @@ Model sinh B: "AI không có khiếu hài hước."                             
 → Update model để xác suất sinh A > sinh B
 ```
 
-:::warning Quan trọng
-LLM **không có "kiến thức" cố định** — nó học **phân phối token** từ data. Nên nó có thể:
-- **Hallucinate**: bịa ra thông tin sai, nhưng nghe rất tự tin.
-- **Bias**: kế thừa định kiến trong dữ liệu huấn luyện.
-- **Cutoff**: chỉ biết tới một thời điểm dữ liệu huấn luyện.
-:::
+> ⚠️ **Cảnh báo — Quan trọng**
+>
+> LLM **không có "kiến thức" cố định** — nó học **phân phối token** từ data. Nên nó có thể:
+> - **Hallucinate**: bịa ra thông tin sai, nhưng nghe rất tự tin.
+> - **Bias**: kế thừa định kiến trong dữ liệu huấn luyện.
+> - **Cutoff**: chỉ biết tới một thời điểm dữ liệu huấn luyện.
 
 ### Bài tập 1.3
 
@@ -233,11 +233,11 @@ LLM **không có "kiến thức" cố định** — nó học **phân phối tok
 | Llama 4 | Meta | 1M | Open-source, on-prem |
 | Qwen 3 | Alibaba | 128K | Tiếng Á, mã nguồn mở |
 
-:::tip Chọn model
-- **Prototype nhanh**: Sonnet/GPT-4.1-mini (rẻ, nhanh).
-- **Lý luận phức tạp**: Opus / GPT-5 / Gemini 2.5 Pro.
-- **On-prem / privacy**: Llama / Qwen.
-:::
+> 💡 **Mẹo — Chọn model**
+>
+> - **Prototype nhanh**: Sonnet/GPT-4.1-mini (rẻ, nhanh).
+> - **Lý luận phức tạp**: Opus / GPT-5 / Gemini 2.5 Pro.
+> - **On-prem / privacy**: Llama / Qwen.
 
 ---
 

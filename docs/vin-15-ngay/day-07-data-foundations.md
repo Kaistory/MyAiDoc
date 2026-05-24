@@ -114,12 +114,12 @@ Chunk lớn (1000-2000 token):
   - Vector "trung bình", retrieval kém chính xác
 ```
 
-:::tip Rule of thumb
-- FAQ / Q&A: 200-400 token
-- Technical doc: 600-1000 token, overlap 100
-- Sách / long-form: 1200 token, overlap 200
-- Code: chia theo function/class
-:::
+> 💡 **Mẹo — Rule of thumb**
+>
+> - FAQ / Q&A: 200-400 token
+> - Technical doc: 600-1000 token, overlap 100
+> - Sách / long-form: 1200 token, overlap 200
+> - Code: chia theo function/class
 
 ### 2.5 Metadata kèm chunk
 
@@ -272,14 +272,14 @@ LIMIT 5;
 
 ## 4. Lỗi thường gặp
 
-:::warning
-1. **Cross-language**: embed bằng model chỉ tiếng Anh → query tiếng Việt fail. Chọn model multilingual (`bge-m3`, OpenAI v3).
-2. **Stale data**: cập nhật chunk mà không re-index → vector cũ vẫn ở DB.
-3. **Chunk quá nhỏ**: 100 token → vector noise.
-4. **Không lưu metadata** → không filter được.
-5. **Mix embedding model**: lưu vector từ 2 model khác nhau cùng collection → search vô nghĩa.
-6. **Forget normalize**: một số DB cần vector đã `L2 normalize` mới tính cosine đúng.
-:::
+> ⚠️ **Cảnh báo**
+>
+> 1. **Cross-language**: embed bằng model chỉ tiếng Anh → query tiếng Việt fail. Chọn model multilingual (`bge-m3`, OpenAI v3).
+> 2. **Stale data**: cập nhật chunk mà không re-index → vector cũ vẫn ở DB.
+> 3. **Chunk quá nhỏ**: 100 token → vector noise.
+> 4. **Không lưu metadata** → không filter được.
+> 5. **Mix embedding model**: lưu vector từ 2 model khác nhau cùng collection → search vô nghĩa.
+> 6. **Forget normalize**: một số DB cần vector đã `L2 normalize` mới tính cosine đúng.
 
 ## 5. Embedding fine-tuning (nâng cao)
 

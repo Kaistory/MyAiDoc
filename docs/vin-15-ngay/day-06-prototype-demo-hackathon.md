@@ -26,12 +26,12 @@ Hackathon **không phải** xây production-grade. Là về:
 11-12h: Demo / pitch
 ```
 
-:::warning Bẫy thường gặp
-- **Scope creep**: thêm tính năng mỗi 30 phút → 5h sau không cái nào chạy.
-- **Auth/database từ đầu**: tốn 3h cho thứ không demo được.
-- **UI quá đẹp**: tốn thời gian, không add giá trị demo.
-- **Cố show off**: thêm RAG + Agent + Multi-modal cùng lúc → vỡ kế hoạch.
-:::
+> ⚠️ **Cảnh báo — Bẫy thường gặp**
+>
+> - **Scope creep**: thêm tính năng mỗi 30 phút → 5h sau không cái nào chạy.
+> - **Auth/database từ đầu**: tốn 3h cho thứ không demo được.
+> - **UI quá đẹp**: tốn thời gian, không add giá trị demo.
+> - **Cố show off**: thêm RAG + Agent + Multi-modal cùng lúc → vỡ kế hoạch.
 
 ### Bài tập 6.1
 
@@ -64,10 +64,10 @@ Liệt kê 3 ý tưởng prototype AI có thể build trong 1 ngày. Tự đánh
 - Docker (nếu deploy)
 ```
 
-:::tip Gradio/Streamlit cho hackathon
-**Gradio** = 50 dòng Python → UI chat đẹp. Cực phù hợp hackathon.
-**Streamlit** = 100 dòng → dashboard + chat + upload file. Demo data app cực nhanh.
-:::
+> 💡 **Mẹo — Gradio/Streamlit cho hackathon**
+>
+> **Gradio** = 50 dòng Python → UI chat đẹp. Cực phù hợp hackathon.
+> **Streamlit** = 100 dòng → dashboard + chat + upload file. Demo data app cực nhanh.
 
 ### Hackathon starter (Streamlit + Claude)
 
@@ -220,13 +220,13 @@ if st.button("Tạo câu hỏi") and cv_file and jd_text:
 
 ### 4.2 Mẹo demo
 
-:::tip
-- **Quay video backup** trước. Mạng hội trường thường tệ.
-- **Test với data thật** đã chuẩn bị — không nhập tay khi đang demo.
-- **Click chuột mạnh**, nói chậm.
-- **Đừng xin lỗi** nếu bug nhỏ — đi tiếp.
-- **Mang USB-C / HDMI** adapter.
-:::
+> 💡 **Mẹo**
+>
+> - **Quay video backup** trước. Mạng hội trường thường tệ.
+> - **Test với data thật** đã chuẩn bị — không nhập tay khi đang demo.
+> - **Click chuột mạnh**, nói chậm.
+> - **Đừng xin lỗi** nếu bug nhỏ — đi tiếp.
+> - **Mang USB-C / HDMI** adapter.
 
 ### 4.3 Anti-pattern khi pitch
 

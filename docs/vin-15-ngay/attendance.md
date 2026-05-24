@@ -42,12 +42,12 @@ Sau 15 ngày, bạn có thể:
 
 ## Cách học hiệu quả
 
-:::tip Gợi ý
-- Mỗi ngày dành **2–3 giờ** đọc + làm bài tập.
-- Code lại ví dụ, đừng chỉ đọc.
-- Có blocker thì ghi lại, tra cứu/hỏi sau.
-- Cuối ngày tự viết **3 câu** tóm tắt vào blog học tập.
-:::
+> 💡 **Mẹo — Gợi ý**
+>
+> - Mỗi ngày dành **2–3 giờ** đọc + làm bài tập.
+> - Code lại ví dụ, đừng chỉ đọc.
+> - Có blocker thì ghi lại, tra cứu/hỏi sau.
+> - Cuối ngày tự viết **3 câu** tóm tắt vào blog học tập.
 
 ## Tài nguyên bổ sung
 

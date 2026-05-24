@@ -332,14 +332,14 @@ Total:          ~2.5 s
 
 ## 5. Anti-patterns
 
-:::warning
-1. **K quá lớn**: lấy 30 chunk → LLM lost in middle, đắt tiền.
-2. **Không có "I don't know"**: prompt phải có instruction "nếu không có context, hãy nói không biết".
-3. **Skip eval**: thay model embedding, không re-test → recall giảm âm thầm.
-4. **Mixed embedding model** trong cùng index.
-5. **Không cache**: cùng query 100 lần/ngày — không cache là phí.
-6. **Quên metadata filter**: trả về tài liệu của user khác (data leak).
-:::
+> ⚠️ **Cảnh báo**
+>
+> 1. **K quá lớn**: lấy 30 chunk → LLM lost in middle, đắt tiền.
+> 2. **Không có "I don't know"**: prompt phải có instruction "nếu không có context, hãy nói không biết".
+> 3. **Skip eval**: thay model embedding, không re-test → recall giảm âm thầm.
+> 4. **Mixed embedding model** trong cùng index.
+> 5. **Không cache**: cùng query 100 lần/ngày — không cache là phí.
+> 6. **Quên metadata filter**: trả về tài liệu của user khác (data leak).
 
 ## 6. Tóm tắt
 

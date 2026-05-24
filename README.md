@@ -1,41 +1,32 @@
-# Website
+# My AI Doc
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+> Sổ tay học tập cá nhân — ghi chú, kiến thức, và tài liệu tham khảo.
 
-## Installation
+Đây là không gian cá nhân nơi mình lưu trữ tài liệu, ghi chú, và những gì học được trong quá trình tự học. Site được xây dựng bằng [Docsify](https://docsify.js.org/) — chạy hoàn toàn tĩnh, không cần build step, không phụ thuộc Node.
 
-```bash
-yarn
-```
+## Nội dung chính
 
-## Local Development
+- **[Lộ trình Vin 15 ngày](docs/vin-15-ngay/attendance.md)** — học AI/LLM, Agent, RAG, LLMOps từ nền tảng tới production
+- **[Lập trình](docs/lap-trinh/vi-du-ghi-chu.md)** — ngôn ngữ, framework, kỹ thuật code
+- **[Nhật ký học tập](blog/2026-05-17-bat-dau.md)** — what I learned today
+- **[Roadmap Firmware Engineer](roadmap.html)** — lộ trình middle dev
 
-```bash
-yarn start
-```
+## Ba đặc điểm
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+**📝 Viết bằng Markdown** — Mọi ghi chú đều là file `.md`. Đơn giản, di động, version control sẵn qua git.
 
-## Build
+**🗂️ Tổ chức theo chủ đề** — Cấu trúc thư mục chính là cấu trúc sidebar. Thêm file mới = chỉnh `_sidebar.md`.
 
-```bash
-yarn build
-```
+**🚀 Không cần cài gì** — Không Node, không build. Push lên GitHub Pages là chạy. Edit local chỉ cần text editor + browser.
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+## Cách thêm tài liệu mới
 
-## Deployment
+1. Tạo file `docs/<category>/<ten-bai>.md`
+2. Thêm link vào `_sidebar.md`
+3. `git push` → site live ngay
 
-Using SSH:
+## Tech stack
 
-```bash
-USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+- **[Docsify](https://docsify.js.org/)** — load markdown ở client, không build
+- **GitHub Pages** — host miễn phí
+- **GitHub Actions** — deploy tự động (chỉ upload, không build)

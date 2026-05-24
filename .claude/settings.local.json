@@ -9,7 +9,18 @@
       "Read(//c/Users/Kaito/AppData/Local/Temp/**)",
       "WebSearch",
       "Bash(netstat -ano)",
-      "Bash(taskkill *)"
+      "Bash(taskkill *)",
+      "PowerShell(& \"C:\\\\Users\\\\Kaito\\\\Documents\\\\Test\\\\MyAiDoc\\\\_docusaurus_old\\\\convert-admonitions.ps1\")",
+      "Bash(grep *)",
+      "Bash(python -m http.server 4567)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4567/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4567/README.md)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4567/_sidebar.md)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4567/docs/intro.md)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4567/docs/vin-15-ngay/day-01-ai-llm-foundation.md)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_console_messages"
     ]
   }
 }

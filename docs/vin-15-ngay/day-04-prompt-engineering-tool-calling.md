@@ -40,9 +40,9 @@ resp = client.messages.create(
 print(resp.content[0].text)
 ```
 
-:::info System prompt
-**System** là chỗ "lập trình hành vi" của LLM. Đặt: vai trò, giọng điệu, định dạng đầu ra, điều cấm.
-:::
+> ℹ️ **Thông tin — System prompt**
+>
+> **System** là chỗ "lập trình hành vi" của LLM. Đặt: vai trò, giọng điệu, định dạng đầu ra, điều cấm.
 
 ### Bài tập 4.1
 
@@ -249,9 +249,9 @@ while True:
     messages.append({"role": "user", "content": tool_results})
 ```
 
-:::tip Parallel tool calls
-Một số model có thể gọi **nhiều tool song song** trong 1 lượt (vd: 2 thành phố). Đảm bảo code xử lý nhiều `tool_use` block trong cùng response.
-:::
+> 💡 **Mẹo — Parallel tool calls**
+>
+> Một số model có thể gọi **nhiều tool song song** trong 1 lượt (vd: 2 thành phố). Đảm bảo code xử lý nhiều `tool_use` block trong cùng response.
 
 ### 3.4 Best practices
 
@@ -283,11 +283,11 @@ resp = client.messages.create(
 )
 ```
 
-:::info Khi nào cache có lợi?
-- System prompt **> 1024 token**.
-- Lượt gọi **lặp đi lặp lại** trong < 5 phút.
-- Multi-turn chat với cùng system.
-:::
+> ℹ️ **Thông tin — Khi nào cache có lợi?**
+>
+> - System prompt **> 1024 token**.
+> - Lượt gọi **lặp đi lặp lại** trong < 5 phút.
+> - Multi-turn chat với cùng system.
 
 ### Bài tập 4.3
 
@@ -299,13 +299,13 @@ resp = client.messages.create(
 
 ## 4. Anti-pattern khi prompt
 
-:::warning Sai lầm
-1. **Prompt quá dài, mơ hồ**: "Hãy thông minh và trả lời tốt nhất có thể" — vô nghĩa.
-2. **Trộn nhiều task** trong 1 prompt mà không cấu trúc.
-3. **Không validate output**: LLM trả JSON sai cú pháp → app crash.
-4. **Không có guardrail**: LLM lộ thông tin, làm việc cấm.
-5. **Hardcode prompt trong code**: khó test, khó update.
-:::
+> ⚠️ **Cảnh báo — Sai lầm**
+>
+> 1. **Prompt quá dài, mơ hồ**: "Hãy thông minh và trả lời tốt nhất có thể" — vô nghĩa.
+> 2. **Trộn nhiều task** trong 1 prompt mà không cấu trúc.
+> 3. **Không validate output**: LLM trả JSON sai cú pháp → app crash.
+> 4. **Không có guardrail**: LLM lộ thông tin, làm việc cấm.
+> 5. **Hardcode prompt trong code**: khó test, khó update.
 
 ## 5. Prompt template framework
 

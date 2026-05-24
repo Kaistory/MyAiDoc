@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My AI Doc — Sổ tay học tập cá nhân</title>
+  <meta name="description" content="Sổ tay học tập cá nhân — ghi chú, kiến thức, và tài liệu tham khảo" />
+  <link rel="icon" href="img/favicon.ico" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" />
+  <style>
+    :root {
+      --theme-color: #2c7be5;
+    }
+    .sidebar-nav > ul > li > p { font-weight: 700; }
+    .markdown-section { max-width: 920px; }
+    .app-name-link img { max-width: 120px; }
+    /* code block tweaks */
+    .markdown-section pre > code { font-size: 0.9rem; line-height: 1.5; }
+    /* table tweaks */
+    .markdown-section table { display: table; width: 100%; }
+  </style>
+</head>
+<body>
+  <div id="app">Đang tải…</div>
+  <script>
+    window.$docsify = {
+      name: 'My AI Doc',
+      repo: 'https://github.com/Kaistory/MyAiDoc',
+      logo: 'img/logo.svg',
+      loadSidebar: true,
+      loadNavbar: true,
+      coverpage: true,
+      onlyCover: false,
+      auto2top: true,
+      maxLevel: 3,
+      subMaxLevel: 2,
+      relativePath: true,
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+        '/.*/_navbar.md': '/_navbar.md'
+      },
+      search: {
+        paths: 'auto',
+        placeholder: 'Tìm kiếm…',
+        noData: 'Không tìm thấy kết quả',
+        depth: 3
+      },
+      pagination: {
+        previousText: '← Trước',
+        nextText: 'Sau →',
+        crossChapter: true,
+        crossChapterText: true
+      },
+      copyCode: {
+        buttonText: 'Copy',
+        errorText: 'Lỗi',
+        successText: 'Đã copy'
+      },
+      tabs: {
+        persist: true,
+        sync: true,
+        theme: 'classic'
+      },
+      formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}',
+      notFoundPage: true
+    };
+  </script>
+  <!-- Docsify core -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <!-- Plugins -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code@2"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+  <!-- Syntax highlighting -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-jsx.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js"></script>
+</body>
+</html>

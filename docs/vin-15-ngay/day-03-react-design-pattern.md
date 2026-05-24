@@ -232,15 +232,15 @@ while True:
 
 ### 3.4 Best practices
 
-:::tip Production-grade ReAct
-- **Giới hạn vòng lặp**: `max_iterations` (10-20) — tránh chạy vô hạn.
-- **Timeout cho mỗi tool**: tránh tool treo.
-- **Truncate history**: khi context dài, summarize đoạn cũ.
-- **Tool descriptions phải rõ**: LLM gọi đúng tool, đúng tham số.
-- **Validate tool input**: dùng JSON Schema, từ chối input xấu.
-- **Log tất cả**: thought, action, observation — để debug.
-- **Streaming**: hiển thị thought ra UI để user thấy agent đang làm gì.
-:::
+> 💡 **Mẹo — Production-grade ReAct**
+>
+> - **Giới hạn vòng lặp**: `max_iterations` (10-20) — tránh chạy vô hạn.
+> - **Timeout cho mỗi tool**: tránh tool treo.
+> - **Truncate history**: khi context dài, summarize đoạn cũ.
+> - **Tool descriptions phải rõ**: LLM gọi đúng tool, đúng tham số.
+> - **Validate tool input**: dùng JSON Schema, từ chối input xấu.
+> - **Log tất cả**: thought, action, observation — để debug.
+> - **Streaming**: hiển thị thought ra UI để user thấy agent đang làm gì.
 
 ### Bài tập 3.3
 
@@ -252,13 +252,13 @@ while True:
 
 ## 4. Anti-pattern khi xây Agent
 
-:::warning Sai lầm
-1. **Quá nhiều tool**: LLM bối rối, chọn sai. Bắt đầu với 3-5 tool.
-2. **Tool description mơ hồ**: "Search something" — LLM gọi bừa.
-3. **Không có stop condition**: agent lặp mãi → cháy quota.
-4. **Tin tưởng tuyệt đối**: agent có thể sai, **đừng cho tool nguy hiểm** (xoá file, gửi email) mà không xác nhận.
-5. **Không log**: lỗi xảy ra mà không biết step nào sai.
-:::
+> ⚠️ **Cảnh báo — Sai lầm**
+>
+> 1. **Quá nhiều tool**: LLM bối rối, chọn sai. Bắt đầu với 3-5 tool.
+> 2. **Tool description mơ hồ**: "Search something" — LLM gọi bừa.
+> 3. **Không có stop condition**: agent lặp mãi → cháy quota.
+> 4. **Tin tưởng tuyệt đối**: agent có thể sai, **đừng cho tool nguy hiểm** (xoá file, gửi email) mà không xác nhận.
+> 5. **Không log**: lỗi xảy ra mà không biết step nào sai.
 
 ## 5. So sánh với các framework
 
@@ -272,10 +272,10 @@ while True:
 | **Anthropic Agent SDK** | Mới, gọn, hợp với Claude |
 | **Tự code** | Nhẹ nhất, ít magic — recommend cho người mới |
 
-:::tip Khuyến nghị
-**Bắt đầu**: tự code 50 dòng Python, hiểu loop.
-**Production**: chuyển sang LangGraph hoặc Agent SDK khi cần.
-:::
+> 💡 **Mẹo — Khuyến nghị**
+>
+> **Bắt đầu**: tự code 50 dòng Python, hiểu loop.
+> **Production**: chuyển sang LangGraph hoặc Agent SDK khi cần.
 
 ---
 

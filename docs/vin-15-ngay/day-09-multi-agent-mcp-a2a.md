@@ -39,9 +39,9 @@ Multi:
 - Sợ chi phí (multi-agent = nhân chi phí lên).
 - Muốn debug dễ.
 
-:::warning
-Anthropic khuyến nghị: **bắt đầu với single agent**. Chỉ leo lên multi-agent khi single agent thực sự không gánh nổi. Multi-agent **đắt hơn 5-15 lần**.
-:::
+> ⚠️ **Cảnh báo**
+>
+> Anthropic khuyến nghị: **bắt đầu với single agent**. Chỉ leo lên multi-agent khi single agent thực sự không gánh nổi. Multi-agent **đắt hơn 5-15 lần**.
 
 ### Bài tập 9.1
 
@@ -260,9 +260,9 @@ Google công bố **A2A protocol** (2025) — chuẩn mở để agent từ vend
 | **State** | Stateless (mỗi call độc lập) | Stateful (task có life-cycle) |
 | **Authority** | Client gọi server | Hai bên peer |
 
-:::info
-MCP và A2A không thay thế nhau. Nhiều hệ thống dùng **cả hai**: agent gọi MCP để lấy tool, agent giao tiếp với agent khác qua A2A.
-:::
+> ℹ️ **Thông tin**
+>
+> MCP và A2A không thay thế nhau. Nhiều hệ thống dùng **cả hai**: agent gọi MCP để lấy tool, agent giao tiếp với agent khác qua A2A.
 
 ### 4.3 Mini code A2A (mô phỏng)
 

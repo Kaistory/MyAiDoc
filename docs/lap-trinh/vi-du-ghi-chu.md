@@ -28,14 +28,14 @@ def hello(name: str) -> str:
 
 ## Admonitions (khối nhấn mạnh)
 
-:::tip Mẹo
-Đây là một mẹo hữu ích.
-:::
+> 💡 **Mẹo**
+>
+> Đây là một mẹo hữu ích.
 
-:::warning Cảnh báo
-Cẩn thận với cái này.
-:::
+> ⚠️ **Cảnh báo**
+>
+> Cẩn thận với cái này.
 
-:::info Thông tin
-Thông tin bổ sung.
-:::
+> ℹ️ **Thông tin**
+>
+> Thông tin bổ sung.

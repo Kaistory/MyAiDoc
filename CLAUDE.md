@@ -3,73 +3,104 @@
 Site cá nhân lưu tài liệu học tập của Kaistory. Lấy cảm hứng từ [d2l.ai](https://d2l.ai/).
 
 ## Stack
-- **Docusaurus 3** (React + Node) — static site generator
-- **TypeScript** cho config & components
-- **MDX** cho nội dung (markdown + React component)
-- **GitHub Pages** để host (free), deploy qua **GitHub Actions** trên push tới `main`
+
+- **[Docsify](https://docsify.js.org/)** — load markdown ở client, **không build step**, **không Node**
+- Markdown thuần `.md` cho mọi nội dung
+- **GitHub Pages** host miễn phí
+- **GitHub Actions** chỉ upload thư mục — không cần install gì
 
 ## URL
+
 - Production: https://kaistory.github.io/MyAiDoc/
-- Dev: http://localhost:3000/MyAiDoc/
+- Local: mở `index.html` qua VS Code Live Preview, hoặc `python -m http.server 3000`
 
 ## Cấu trúc
 
 ```
-docs/                       # nội dung tài liệu (markdown/mdx)
-  intro.mdx                 # trang giới thiệu
-  lap-trinh/                # category — ghi chú lập trình
-  ai-ml/                    # category — AI/ML
-  cong-cu/                  # category — công cụ
-  ghi-chu/                  # category — ghi chú chung
-  <category>/_category_.json # metadata cho category (label, position)
-blog/                       # nhật ký học tập
-  authors.yml               # thông tin tác giả
-src/
-  pages/index.tsx           # trang chủ
-  components/HomepageFeatures/  # các block trên trang chủ
-  css/custom.css            # CSS toàn site
-static/img/                 # ảnh, logo, favicon
-docusaurus.config.ts        # config chính
-sidebars.ts                 # autogenerate từ docs/
-.github/workflows/deploy.yml  # CI deploy GitHub Pages
+/
+├── index.html              # Docsify entry (load Docsify JS từ CDN)
+├── README.md               # Trang chủ (#/)
+├── _sidebar.md             # Sidebar nav (toàn site)
+├── _navbar.md              # Top navbar
+├── _coverpage.md           # Cover page
+├── .nojekyll               # Cho GitHub Pages biết bỏ qua Jekyll
+├── docs/                   # Tài liệu
+│   ├── intro.md
+│   ├── vin-15-ngay/        # Lộ trình 15 ngày
+│   └── lap-trinh/          # Note lập trình
+├── blog/                   # Nhật ký
+│   └── 2026-05-17-bat-dau.md
+├── img/                    # Ảnh, logo, favicon
+├── roadmap.html            # Trang HTML tĩnh độc lập
+└── .github/workflows/
+    └── deploy.yml          # Upload + deploy GitHub Pages
 ```
 
-## Lệnh thường dùng
+## Chạy local
+
+Không cần install gì:
 
 ```bash
-npm start          # dev server, http://localhost:3000/MyAiDoc/
-npm run build      # build production vào build/
-npm run serve      # preview build/ tại localhost:3000
-npm run clear      # xóa cache .docusaurus/
-npm run typecheck  # kiểm tra TypeScript
+# Cách 1: Python (có sẵn trên hầu hết máy)
+python -m http.server 3000
+# rồi mở http://localhost:3000
+
+# Cách 2: VS Code — cài extension "Live Preview", mở index.html
+
+# Cách 3: Push lên GitHub Pages, xem trực tiếp
 ```
 
 ## Thêm tài liệu mới
 
-1. Tạo file `docs/<category>/<ten-bai>.md` (hoặc `.mdx` nếu cần React component)
-2. Thêm frontmatter:
+1. Tạo `docs/<category>/<ten-bai>.md` với frontmatter:
    ```yaml
    ---
    title: Tiêu đề bài
-   sidebar_position: 1  # optional, để thứ tự
    ---
    ```
-3. `git push` → site tự deploy.
+2. Thêm dòng tương ứng vào `_sidebar.md`:
+   ```markdown
+   - [Tiêu đề bài](docs/<category>/<ten-bai>.md)
+   ```
+3. `git push` → site live ngay.
 
 ## Thêm category mới
 
 1. Tạo thư mục `docs/<ten-category>/`
-2. Tạo `docs/<ten-category>/_category_.json` với label, position, description
-3. Thêm các file `.md` bên trong
+2. Thêm section mới vào `_sidebar.md`:
+   ```markdown
+   - **Tên category**
+     - [Bài đầu tiên](docs/<ten-category>/bai-1.md)
+   ```
+3. Thêm các file `.md` vào thư mục
 
 ## Deploy
 
-Tự động qua `.github/workflows/deploy.yml` khi push lên `main`. Cần bật GitHub Pages trong repo settings:
+Tự động qua `.github/workflows/deploy.yml` khi push lên `main`. Cần bật GitHub Pages trong repo:
 **Settings → Pages → Source: GitHub Actions**.
+
+Workflow chỉ upload toàn bộ thư mục lên GitHub Pages — **không có build step**, **không install Node**.
 
 ## Quy ước
 
-- Ngôn ngữ chính: **tiếng Việt** (`defaultLocale: 'vi'` trong config)
+- Ngôn ngữ chính: **tiếng Việt**
 - Đặt tên file: kebab-case không dấu (`closure-trong-javascript.md`)
-- Hình ảnh để trong `static/img/<category>/`
+- Hình ảnh để trong `img/<category>/`
 - Code block luôn kèm language tag: ` ```js `, ` ```python `, ` ```bash `
+- Admonitions: dùng blockquote chuẩn, ví dụ:
+  ```markdown
+  > 💡 **Mẹo — Title**
+  >
+  > Nội dung mẹo
+  ```
+
+## Lưu ý về Docsify
+
+- File markdown được fetch + render ở **client**, KHÔNG có pre-build HTML
+- Mọi link tới file `.md` trong sidebar phải có đuôi `.md`
+- Frontmatter (`---`) Docsify không render nhưng cũng không hiện ra, vẫn dùng được
+- Không hỗ trợ MDX (React component trong markdown) — chỉ markdown thuần + HTML inline
+
+## Migration history
+
+Trước đây site dùng Docusaurus 3 (cần Node + npm). Đã migrate sang Docsify (2026-05-24) để loại bỏ phụ thuộc Node — code chạy được trên máy khác mà không cần cài gì. Lịch sử Docusaurus có thể xem trong git log (commit trước `9690bcf base-website`).
