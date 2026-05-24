@@ -1,4 +1,4 @@
-- [Tài liệu](docs/intro.md)
-- [Nhật ký](blog/2026-05-17-bat-dau.md)
-- [Roadmap](roadmap.html)
+- [Tài liệu](/docs/intro.md)
+- [Nhật ký](/blog/2026-05-17-bat-dau.md)
+- [Roadmap](/roadmap.html)
 - [GitHub](https://github.com/Kaistory/MyAiDoc)

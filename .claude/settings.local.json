@@ -20,7 +20,17 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4567/docs/vin-15-ngay/day-01-ai-llm-foundation.md)",
       "mcp__playwright__browser_navigate",
       "mcp__playwright__browser_wait_for",
-      "mcp__playwright__browser_console_messages"
+      "mcp__playwright__browser_console_messages",
+      "Bash(git *)",
+      "Bash(findstr vin-15 *)",
+      "Bash(python -m http.server 3000)",
+      "mcp__fetch__fetch",
+      "WebFetch(domain:github.com)",
+      "mcp__playwright__browser_network_requests",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_close",
+      "Bash(exit 0)"
     ]
   }
 }
